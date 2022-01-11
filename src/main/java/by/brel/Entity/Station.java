@@ -1,4 +1,4 @@
-package Entity;
+package by.brel.Entity;
 
 import org.apache.log4j.Logger;
 

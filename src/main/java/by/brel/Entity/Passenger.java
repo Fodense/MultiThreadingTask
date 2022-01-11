@@ -1,4 +1,4 @@
-package Entity;
+package by.brel.Entity;
 
 import org.apache.log4j.Logger;
 
@@ -20,7 +20,7 @@ public class Passenger implements Runnable {
         else
             vector = 1;
 
-        Main.stationsList.get(zoneStart).passengerWaitBus(vector).passengersInBus(zoneStop);
+//        Main.stationsList.get(zoneStart).passengerWaitBus(vector).passengersInBus(zoneStop);
     }
 
     public Passenger() {

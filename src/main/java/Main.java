@@ -1,42 +1,75 @@
+import by.brel.Entity.Station;
+
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
+import java.util.Random;
 
 public class Main {
+
+//    public static ArrayList<Station> stationsList = new ArrayList<>();
+
+
 
     public static void main(String[] args) throws IOException {
         File file = new File("src/main/resources/config.properties");
         Properties properties = new Properties();
         properties.load(new FileReader(file));
 
-        int numberPassengers = Integer.parseInt(properties.getProperty("number.passengers"));   // Общее число пассажиров
-        int numberStops = Integer.parseInt(properties.getProperty("number.stops"));             // Количество остановок в одну сторону (т.о. все остановки парные)
-        int numberBuses = Integer.parseInt(properties.getProperty("number.buses"));             // Количество автобусов
-        int capacityBus = Integer.parseInt(properties.getProperty("capacity.bus"));             // Вместимость каждого автобуса
-        int movementInterval = Integer.parseInt(properties.getProperty("movement.interval"));   // Интервал движения
-        int travelSpeed = Integer.parseInt(properties.getProperty("travel.speed"));             // Скорость движения
+        int countPassengers = Integer.parseInt(properties.getProperty("passengers.count.max"));   // Общее число пассажиров
+        int countStations = Integer.parseInt(properties.getProperty("stations.count.max"));       // Количество остановок в одну сторону (т.о. все остановки парные)
+        int countBuses = Integer.parseInt(properties.getProperty("bus.count.max"));               // Количество автобусов
+        int maxCapacityBus = Integer.parseInt(properties.getProperty("bus.capacity"));            // Вместимость каждого автобуса
+        int movementInterval = Integer.parseInt(properties.getProperty("movement.interval"));     // Интервал движения
+        int busSpeed = Integer.parseInt(properties.getProperty("bus.speed"));                     // Скорость движения
+
+        Random random = new Random();
 
         Runnable bus = null;
         Runnable passenger = null;
         Thread threadBus = null;
         Thread threadPassenger = null;
 
-        for (int i = 0; i < 4; i++) {
-            bus = new Bus();
-            threadBus = new Thread(bus);
+        //Инженерим автобусы
 
-            threadBus.start();
-        }
 
-        for (int i = 0; i < 4; i++) {
-            passenger = new Passenger();
-            threadPassenger = new Thread(passenger);
+        //Строим остановки
 
-            threadPassenger.start();
-        }
+
+        //Рожаем пассажиров
+
     }
+
+    private static void init() {
+
+    }
+
+//    private static void createBus() {
+//        for (int i = 1; i <= countBuses; i++) {
+//            bus = new Entity.Bus(1, maxCapacityBus, 0, movementInterval, busSpeed);
+//            threadBus = new Thread(bus);
+//
+//            threadBus.start();
+//        }
+//    }
+//
+//    private static void createPassenger() {
+//        for (int i = 1; i <= countPassengers; i++) {
+//            int zoneStart = random.nextInt(countStations);
+//            int zoneStop = random.nextInt(countStations);
+//
+//            passenger = new Entity.Passenger(zoneStart, zoneStop);
+//            threadPassenger = new Thread(passenger);
+//
+//            threadPassenger.start();
+//        }
+//    }
+//
+//    private static void createStation() {
+//        for (int i = 1; i <= countStations; i++) {
+//            stationsList.add(new Entity.Station(i));
+//        }
+//    }
 }
