@@ -28,12 +28,12 @@ public class Main {
 
     private static void createPassenger() {
         for (int i = 1; i <= Constants.PASSENGERS_COUNT_MAX; i++) {
-            Random random = new Random();
+//            Random random = new Random();
+//
+//            int zoneStart = random.nextInt(Constants.STATIONS_COUNT_MAX) + 1;
+//            int zoneStop = random.nextInt(Constants.STATIONS_COUNT_MAX) + 1;
 
-            int zoneStart = random.nextInt(Constants.STATIONS_COUNT_MAX) + 1;
-            int zoneStop = random.nextInt(Constants.STATIONS_COUNT_MAX) + 1;
-
-            Passenger passenger = new Passenger(i, zoneStart, zoneStop);
+            Passenger passenger = new Passenger(i, 1, 2);
             Thread threadPassenger = new Thread(passenger);
 
             threadPassenger.start();
