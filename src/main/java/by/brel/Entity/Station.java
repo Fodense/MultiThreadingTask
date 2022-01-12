@@ -8,7 +8,6 @@ public class Station {
     private Bus bus;
 
     private int numberStation;
-    private int countPassenger;
 
     public Station() {
     }
@@ -17,32 +16,31 @@ public class Station {
         this.numberStation = numberStation;
     }
 
-    public synchronized Bus passengerWaitBus(int numberStation) {
-        this.countPassenger++;
+    public synchronized Bus passengersInStation(int name, int zoneStart, int interval) {
+        log.info("Пассажир " + name + " прибыл на остановку " +  numberStation + " и ожидает автобус с интервалом " + interval);
+
         boolean flag = true;
 
         try {
             while (flag) {
-                log.info("Пассажир " + Thread.currentThread().getName() + " прибыл на остановку и ожидает автобус");
                 this.wait();
 
-                if (bus.getCapacityBus() > 0 && bus.getMovementInterval() == numberStation) {
+                if (bus.getMovementInterval() == interval && bus.getCapacityBus() > 0) {
                     bus.addPassenger();
-                    bus.notifyBus();
-
-                    this.countPassenger--;
 
                     flag = false;
 
-                    log.info("Пассажир сел в автобус");
+                    log.info("Пассажир " + name + " сел в автобус " + bus.getName());
 
-                } else {
-                    log.info("Мест в автобусе " + bus + " нет");
-
-                    this.wait();
                 }
 
-                return bus;
+                if (bus.getCountPassenger() == 0) {
+                    bus.notifyBus();
+                }
+
+                if (!flag) {
+                    return bus;
+                }
             }
 
         } catch (InterruptedException e) {
@@ -52,7 +50,7 @@ public class Station {
         return null;
     }
 
-    public void busWaitPassenger(Bus bus) {
+    public void busInStation(Bus bus) {
         synchronized (this) {
 
             bus.setStation(this);

@@ -1,5 +1,6 @@
 package by.brel.Entity;
 
+import by.brel.Сonstants.Constants;
 import org.apache.log4j.Logger;
 
 public class Bus implements Runnable {
@@ -7,19 +8,22 @@ public class Bus implements Runnable {
     private static final Logger log = Logger.getLogger(Bus.class);
 
     private Station station;
-    private final Object sleepObj = new Object();
+    private final Object monitor = new Object();
 
+    private int name;
     private int zoneStart;
     private int maxCapacityBus;
     private int countPassenger;
     private int movementInterval;
     private int travelSpeed;
-    int idleCount = 0;
 
     public Bus() {
     }
 
-    public Bus(int zoneStart, int maxCapacityBus, int countPassenger, int movementInterval, int travelSpeed) {
+    public Bus(int name, int zoneStart, int maxCapacityBus, int countPassenger, int movementInterval, int travelSpeed) {
+        log.info("Автобус " + name + " поехал; " + "Мест " + maxCapacityBus + "; Скорость " + travelSpeed + "; Интервал " + movementInterval);
+
+        this.name = name;
         this.zoneStart = zoneStart;
         this.maxCapacityBus = maxCapacityBus;
         this.countPassenger = countPassenger;
@@ -29,14 +33,11 @@ public class Bus implements Runnable {
 
     @Override
     public void run() {
-        log.info("Автобус " + Thread.currentThread().getName() + " поехал; " + "Мест " + maxCapacityBus + "; Скорость " + travelSpeed);
-
         try {
-            int countStations = Main.stationsList.size();
+            int countStations = Constants.STATIONS_LIST.size();
             boolean flag = true;
-            int maxIdleCount = countStations * 2 + 2;//макс. пустых остановок= полный маршрут +2 ост.
 
-            for (int index = zoneStart, j = movementInterval; flag;) {
+            for (int index = getZoneStart(), j = getMovementInterval(); flag;) {
 
                 //region Условие движения по кругу
                 if (index == countStations) {
@@ -47,17 +48,9 @@ public class Bus implements Runnable {
                     index = countStations - 1;
                 }
 
-                if (countPassenger == 0)
-                    idleCount++;
-                else
-                    idleCount = 0;
+                travelNextStation();
+                moveOnStation(index);
 
-                if (idleCount >= maxIdleCount)
-                    flag = false;
-
-
-                move();
-                step(index);
                 index += j;
             }
 
@@ -66,50 +59,55 @@ public class Bus implements Runnable {
         }
     }
 
-    public synchronized void passengersInBus(int zoneEnd) {
+    public synchronized void passengersInBus(int name, int zoneEnd) {
         try {
-            log.debug(Thread.currentThread().getName() + " Сидел в автобусе");
+            log.info("Пассажир " + name +" сидит в автобусе " + getName());
 
             boolean flag = true;
 
             while (flag) {
                 this.wait();
 
-                if (this.movementInterval == zoneEnd) {
+                if (this.getMovementInterval() == zoneEnd) {
                     this.removePassenger();
 
-                    log.info(Thread.currentThread().getName()+" вышел");
+                    log.info("Пассажир " + name + " вышел");
 
                     flag = false;
                 }
+
+                if (this.getCountPassenger() == 0) {
+                    this.notifyBus();
+                }
             }
+
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
 
-    public synchronized int getCapacityBus() {
+    public int getCapacityBus() {
         return (maxCapacityBus - countPassenger);
     }
 
-    public synchronized void addPassenger() {
+    public void addPassenger() {
         this.countPassenger++;
     }
 
-    public synchronized void removePassenger() {
+    public void removePassenger() {
         this.countPassenger--;
     }
 
-    public synchronized void notifyBus() {
-        synchronized (this.sleepObj) {
-            this.sleepObj.notify();
+    public void notifyBus() {
+        synchronized (this.monitor) {
+            this.monitor.notify();
         }
     }
 
     public void waitBus() {
-        synchronized (this.sleepObj) {
+        synchronized (this.monitor) {
             try {
-                this.sleepObj.wait();
+                this.monitor.wait();
 
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -117,27 +115,22 @@ public class Bus implements Runnable {
         }
     }
 
-    public synchronized void waitPassenger() {
-        try {
-            this.wait();
-
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
     public synchronized void notifyAllPassenger() {
         this.notifyAll();
     }
 
-    private void move() throws InterruptedException {
+    private void travelNextStation() throws InterruptedException {
         Thread.sleep(getTravelSpeed());
     }
 
-    private void step(int i) throws InterruptedException {
-        log.info("Автобус " + Thread.currentThread().getName() + " движется на остановку №" + i);
+    private void moveOnStation(int i) throws InterruptedException {
+        log.info("Автобус " + getName() + " движется на остановку №" + (i + 1));
 
-        Main.stationsList.get(i).busWaitPassenger(this);
+        Constants.STATIONS_LIST.get(i).busInStation(this);
+    }
+
+    public int getName() {
+        return name;
     }
 
     public Station getStation() {
@@ -152,39 +145,19 @@ public class Bus implements Runnable {
         return zoneStart;
     }
 
-    public void setZoneStart(int zoneStart) {
-        this.zoneStart = zoneStart;
-    }
-
     public int getMaxCapacityBus() {
         return maxCapacityBus;
-    }
-
-    public void setMaxCapacityBus(int maxCapacityBus) {
-        this.maxCapacityBus = maxCapacityBus;
     }
 
     public int getCountPassenger() {
         return countPassenger;
     }
 
-    public void setCountPassenger(int countPassenger) {
-        this.countPassenger = countPassenger;
-    }
-
     public int getMovementInterval() {
         return movementInterval;
     }
 
-    public void setMovementInterval(int movementInterval) {
-        this.movementInterval = movementInterval;
-    }
-
     public int getTravelSpeed() {
         return travelSpeed;
-    }
-
-    public void setTravelSpeed(int travelSpeed) {
-        this.travelSpeed = travelSpeed;
     }
 }
