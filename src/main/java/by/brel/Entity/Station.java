@@ -2,10 +2,13 @@ package by.brel.Entity;
 
 import org.apache.log4j.Logger;
 
+import java.util.Objects;
+
 public class Station {
 
     private static final Logger log = Logger.getLogger(Station.class);
     private Bus bus;
+    private final Object monitor = new Object();
 
     private int numberStation;
 
@@ -16,8 +19,8 @@ public class Station {
         this.numberStation = numberStation;
     }
 
-    public synchronized Bus passengersInStation(int name, int zoneStart, int interval) {
-        log.info("Пассажир " + name + " прибыл на остановку " +  numberStation + " и ожидает автобус с интервалом " + interval);
+    public synchronized Bus passengersInStation(int name, int zoneStart, int number) {
+        log.info("Пассажир " + name + " прибыл на остановку " +  numberStation + " и ожидает автобус " + number);
 
         boolean flag = true;
 
@@ -25,7 +28,7 @@ public class Station {
             while (flag) {
                 this.wait();
 
-                if (bus.getMovementInterval() == interval && bus.getCapacityBus() > 0) {
+                if (bus.getMovementInterval() == number && bus.getFreePlacesBus() > 0) {
                     bus.addPassenger();
 
                     flag = false;
@@ -34,9 +37,7 @@ public class Station {
 
                 }
 
-                if (bus.getCountPassenger() == 0) {
-                    bus.notifyBus();
-                }
+                bus.notifyBus();
 
                 if (!flag) {
                     return bus;
@@ -56,12 +57,16 @@ public class Station {
             bus.setStation(this);
 
             if (bus.getCountPassenger() != 0) {
-                bus.notifyAllPassenger();
+                bus.notifyAllPassengerInBus();
                 bus.waitBus();
             }
 
             this.bus = bus;
             this.notifyAll();
         }
+    }
+
+    public int getNumberStation() {
+        return numberStation;
     }
 }
