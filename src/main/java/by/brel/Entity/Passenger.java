@@ -24,16 +24,16 @@ public class Passenger implements Runnable {
 
     @Override
     public void run() {
-        int interval;
+        int routeNumber;
 
         if ((getZoneStart() - getZoneStop()) % 2 == 0) {
-            interval = 0;
+            routeNumber = 1;
 
         } else {
-            interval = 1;
+            routeNumber = 2;
         }
 
-        Constants.STATIONS_LIST.get(getZoneStart() - 1).passengersInStation(getName(), getZoneStart(), interval).passengersInBus(getName(), getZoneStop() - 1);
+        Constants.STATIONS_LIST.get(getZoneStart() - 1).passengersInStation(getName(), getZoneStart(), 1).passengersInBus(getName(), getZoneStop());
     }
 
     public int getName() {
