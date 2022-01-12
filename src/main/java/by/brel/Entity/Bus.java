@@ -37,9 +37,7 @@ public class Bus implements Runnable {
             int countStations = Constants.STATIONS_LIST.size();
             boolean flag = true;
 
-            for (int index = getZoneStart(), j = getMovementInterval(); flag;) {
-
-                //region Условие движения по кругу
+            for (int index = getZoneStart(), i = getMovementInterval(); flag;) {
                 if (index == countStations) {
                     index = 0;
                 }
@@ -51,7 +49,7 @@ public class Bus implements Runnable {
                 travelNextStation();
                 moveOnStation(index);
 
-                index += j;
+                index += i;
             }
 
         } catch (InterruptedException e) {
