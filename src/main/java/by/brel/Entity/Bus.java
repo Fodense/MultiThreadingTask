@@ -16,11 +16,12 @@ public class Bus implements Runnable {
     private int countPassenger;
     private int movementInterval;
     private int travelSpeed;
+    private boolean flag2;
 
     public Bus() {
     }
 
-    public Bus(int name, int zoneStart, int maxCapacityBus, int countPassenger, int movementInterval, int travelSpeed) {
+    public Bus(int name, int zoneStart, int maxCapacityBus, int countPassenger, int movementInterval, int travelSpeed, boolean flag2) {
         log.info("Автобус " + name + " поехал; " + "Мест " + maxCapacityBus + "; Скорость " + travelSpeed + "; Маршрут " + movementInterval);
 
         this.name = name;
@@ -29,6 +30,7 @@ public class Bus implements Runnable {
         this.countPassenger = countPassenger;
         this.movementInterval = movementInterval;
         this.travelSpeed = travelSpeed;
+        this.flag2 = flag2;
     }
 
     @Override
@@ -104,7 +106,9 @@ public class Bus implements Runnable {
     public void waitBus() {
         synchronized (this.monitor) {
             try {
-                this.monitor.wait();
+                if (this.isFlag2()) {
+                    this.monitor.wait();
+                }
 
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -158,5 +162,13 @@ public class Bus implements Runnable {
 
     public int getTravelSpeed() {
         return travelSpeed;
+    }
+
+    public boolean isFlag2() {
+        return flag2;
+    }
+
+    public void setFlag2(boolean flag2) {
+        this.flag2 = flag2;
     }
 }
