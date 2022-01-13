@@ -1,7 +1,11 @@
 package by.brel.Entity;
 
+import by.brel.Utils.Util;
 import by.brel.Сonstants.Constants;
 import org.apache.log4j.Logger;
+
+import java.util.Arrays;
+import java.util.Set;
 
 public class Bus implements Runnable {
 
@@ -40,19 +44,25 @@ public class Bus implements Runnable {
         try {
             int countStations = Constants.STATIONS_LIST.size();
 
-            for (int zone = getZoneStart(), interval = getRoute(); true;) {
+            for (int zone = 0, interval = getRoute(); true;) {
                 if (zone == countStations) {
+//                    this.setRoute(Utils.getRandomInt(Constants.BUS_ROUTE_MAX));
+
+//                    zone = Utils.getRandomInt(Constants.STATIONS_COUNT_MAX);
+
                     zone = 0;
                 }
 
-                if (zone == -1) {
-                    zone = countStations - 1;
+
+                if (zone >= countStations) {
+                    zone = 0;
                 }
 
                 travelNextStation();
-                moveOnStation(zone);
+                moveOnStation(zone, interval);
 
                 zone += interval;
+
             }
 
         } catch (InterruptedException e) {
@@ -72,7 +82,7 @@ public class Bus implements Runnable {
                 if (this.getStation().getNumberStation() == zoneEnd) {
                     this.removePassenger();
 
-                    log.info("Пассажир " + name + " вышел");
+                    log.info("Пассажир " + name + " вышел из автобуса " + getName());
 
                     flag = false;
                 }
@@ -126,9 +136,10 @@ public class Bus implements Runnable {
         Thread.sleep(getTravelSpeed());
     }
 
-    private void moveOnStation(int i) throws InterruptedException {
+    private void moveOnStation(int i, int j) throws InterruptedException {
         synchronized (this.monitor) {
-            log.info("Автобус " + getName() + " движется на остановку №" + (i + 1));
+            log.info("Автобус " + getName() + " движется на остановку №" + (i + 1) + "; Пассажиров " + getCountPassenger());
+            log.debug(i + "|" + j);
 
             Constants.STATIONS_LIST.get(i).busInStation(this);
         }
