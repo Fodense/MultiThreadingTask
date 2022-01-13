@@ -45,14 +45,13 @@ public class Main {
         for (int i = 1; i <= Constants.BUS_COUNT_MAX; i++) {
             Bus bus = new Bus(
                     i,
-                    0,
                     Constants.BUS_CAPACITY,
                     0,
                     Constants.BUS_MOVEMENT_INTERVAL,
                     Constants.BUS_SPEED,
                     Util.getRandomInt(Constants.BUS_ROUTE_MAX),
-                    true
-//                    Util.getRouteSet()
+                    true,
+                    Util.getRandomBoolean()
             );
             Thread threadBus = new Thread(bus);
 

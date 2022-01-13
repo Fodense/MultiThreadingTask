@@ -73,6 +73,7 @@ public class Station {
 
             this.bus = bus;
             bus.setFlag2(false);
+
             this.notifyAll();
         }
     }

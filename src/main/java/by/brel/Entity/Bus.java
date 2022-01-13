@@ -4,8 +4,7 @@ import by.brel.Utils.Util;
 import by.brel.Сonstants.Constants;
 import org.apache.log4j.Logger;
 
-import java.util.Arrays;
-import java.util.Set;
+import java.util.List;
 
 public class Bus implements Runnable {
 
@@ -15,28 +14,28 @@ public class Bus implements Runnable {
     private final Object monitor = new Object();
 
     private int name;
-    private int zoneStart;
     private int maxCapacityBus;
     private int countPassenger;
     private int movementInterval;
     private int travelSpeed;
     private int route;
     private boolean flag2; //fixed DeadLock
+    private boolean direction;
 
     public Bus() {
     }
 
-    public Bus(int name, int zoneStart, int maxCapacityBus, int countPassenger, int movementInterval, int travelSpeed, int route, boolean flag2) {
+    public Bus(int name, int maxCapacityBus, int countPassenger, int movementInterval, int travelSpeed, int route, boolean flag2, boolean direction) {
         log.info("Автобус " + name + " поехал; " + "Мест " + maxCapacityBus + "; Скорость " + travelSpeed + "; Маршрут " + route);
 
         this.name = name;
-        this.zoneStart = zoneStart;
         this.maxCapacityBus = maxCapacityBus;
         this.countPassenger = countPassenger;
         this.movementInterval = movementInterval;
         this.travelSpeed = travelSpeed;
         this.route = route;
         this.flag2 = flag2;
+        this.direction = direction;
     }
 
     @Override
@@ -44,24 +43,29 @@ public class Bus implements Runnable {
         try {
             int countStations = Constants.STATIONS_LIST.size();
 
-            for (int zone = 0, interval = getRoute(); true;) {
-                if (zone == countStations) {
-//                    this.setRoute(Utils.getRandomInt(Constants.BUS_ROUTE_MAX));
+            for (int i = 0; true;) {
+                int interval = getRoute();
 
-//                    zone = Utils.getRandomInt(Constants.STATIONS_COUNT_MAX);
+                if (i >= countStations) {
+                    this.direction = Util.getRandomBoolean();
 
-                    zone = 0;
+                    i = 0;
                 }
 
+                if (isDirection() && interval % 2 == 0) {
+                    interval = 1;
+                    this.direction = Util.getRandomBoolean();
+                }
 
-                if (zone >= countStations) {
-                    zone = 0;
+                if (!isDirection()) {
+                    interval = 2;
+                    this.direction = Util.getRandomBoolean();
                 }
 
                 travelNextStation();
-                moveOnStation(zone, interval);
+                moveOnStation(i);
 
-                zone += interval;
+                i += interval;
 
             }
 
@@ -136,10 +140,9 @@ public class Bus implements Runnable {
         Thread.sleep(getTravelSpeed());
     }
 
-    private void moveOnStation(int i, int j) throws InterruptedException {
+    private void moveOnStation(int i) throws InterruptedException {
         synchronized (this.monitor) {
-            log.info("Автобус " + getName() + " движется на остановку №" + (i + 1) + "; Пассажиров " + getCountPassenger());
-            log.debug(i + "|" + j);
+            log.info("Автобус " + getName() + " движется на остановку №" + (i + 1) + "; Пассажиров " + getCountPassenger() + "; Мест " + getFreePlacesBus());
 
             Constants.STATIONS_LIST.get(i).busInStation(this);
         }
@@ -155,10 +158,6 @@ public class Bus implements Runnable {
 
     public void setStation(Station station) {
         this.station = station;
-    }
-
-    public int getZoneStart() {
-        return zoneStart;
     }
 
     public int getMaxCapacityBus() {
@@ -191,5 +190,13 @@ public class Bus implements Runnable {
 
     public void setFlag2(boolean flag2) {
         this.flag2 = flag2;
+    }
+
+    public boolean isDirection() {
+        return direction;
+    }
+
+    public void setDirection(boolean direction) {
+        this.direction = direction;
     }
 }

@@ -2,10 +2,7 @@ package by.brel.Utils;
 
 import by.brel.Сonstants.Constants;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 
 public class Util {
 
@@ -25,15 +22,31 @@ public class Util {
         }
     }
 
-    public static Set getRouteSet() {
-        Set<Integer> set = new HashSet<>();
+    public static List getRouteList() {
+        int[] ints = new int[5];
 
-        for (int i = 0; i < Constants.STATIONS_COUNT_MAX; i++) {
-            set.add(getRandomInt(Constants.STATIONS_COUNT_MAX));
+        for (int i = 0; i < 5; i++) {
+            ints[i] = getRandomInt(5);
         }
 
-        System.out.println(set);
+        return getUniqueList(ints);
+    }
 
-        return set;
+    private static List getUniqueList(int[] arr) {
+        Set<Integer> set = new HashSet<>();
+
+        for (int i = 0; i < arr.length; i++) {
+            set.add(arr[i]);
+        }
+
+        List list = new ArrayList(set);;
+
+        return list;
+    }
+
+    public static boolean getRandomBoolean() {
+        Random random = new Random();
+
+        return random.nextBoolean();
     }
 }
