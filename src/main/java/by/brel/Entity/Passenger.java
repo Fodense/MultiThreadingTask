@@ -33,7 +33,7 @@ public class Passenger implements Runnable {
             routeNumber = 2;
         }
 
-        Constants.STATIONS_LIST.get(getZoneStart() - 1).passengersInStation(getName(), getZoneStart(), 1).passengersInBus(getName(), getZoneStop());
+        Constants.STATIONS_LIST.get(getZoneStart() - 1).passengersInStation(getName(), getZoneStart(), routeNumber).passengersInBus(getName(), getZoneStop());
     }
 
     public int getName() {

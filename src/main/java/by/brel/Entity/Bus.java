@@ -16,13 +16,14 @@ public class Bus implements Runnable {
     private int countPassenger;
     private int movementInterval;
     private int travelSpeed;
-    private boolean flag2;
+    private int route;
+    private boolean flag2; //fixed DeadLock
 
     public Bus() {
     }
 
-    public Bus(int name, int zoneStart, int maxCapacityBus, int countPassenger, int movementInterval, int travelSpeed, boolean flag2) {
-        log.info("Автобус " + name + " поехал; " + "Мест " + maxCapacityBus + "; Скорость " + travelSpeed + "; Маршрут " + movementInterval);
+    public Bus(int name, int zoneStart, int maxCapacityBus, int countPassenger, int movementInterval, int travelSpeed, int route, boolean flag2) {
+        log.info("Автобус " + name + " поехал; " + "Мест " + maxCapacityBus + "; Скорость " + travelSpeed + "; Маршрут " + route);
 
         this.name = name;
         this.zoneStart = zoneStart;
@@ -30,6 +31,7 @@ public class Bus implements Runnable {
         this.countPassenger = countPassenger;
         this.movementInterval = movementInterval;
         this.travelSpeed = travelSpeed;
+        this.route = route;
         this.flag2 = flag2;
     }
 
@@ -38,7 +40,7 @@ public class Bus implements Runnable {
         try {
             int countStations = Constants.STATIONS_LIST.size();
 
-            for (int zone = getZoneStart(), interval = getMovementInterval(); true;) {
+            for (int zone = getZoneStart(), interval = getRoute(); true;) {
                 if (zone == countStations) {
                     zone = 0;
                 }
@@ -162,6 +164,14 @@ public class Bus implements Runnable {
 
     public int getTravelSpeed() {
         return travelSpeed;
+    }
+
+    public int getRoute() {
+        return route;
+    }
+
+    public void setRoute(int route) {
+        this.route = route;
     }
 
     public boolean isFlag2() {

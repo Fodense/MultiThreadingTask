@@ -19,8 +19,8 @@ public class Station {
         this.numberStation = numberStation;
     }
 
-    public synchronized Bus passengersInStation(int name, int zoneStart, int number) {
-        log.info("Пассажир " + name + " прибыл на остановку " +  numberStation + " и ожидает автобус " + number);
+    public synchronized Bus passengersInStation(int name, int zoneStart, int route) {
+        log.info("Пассажир " + name + " прибыл на остановку " +  numberStation + "; Маршрут " + route);
 
         boolean flag = true;
 
@@ -28,7 +28,7 @@ public class Station {
             while (flag) {
                 this.wait();
 
-                if (bus.getMovementInterval() == number && bus.getFreePlacesBus() > 0) {
+                if (bus.getRoute() == route && bus.getFreePlacesBus() > 0) {
                     bus.addPassenger();
 
                     flag = false;

@@ -59,10 +59,16 @@ public class Main {
 
     private static void createBus() throws InterruptedException {
         for (int i = 1; i <= Constants.BUS_COUNT_MAX; i++) {
-            Bus bus = new Bus(i, 0, Constants.BUS_CAPACITY, 0, Constants.BUS_MOVEMENT_INTERVAL, Constants.BUS_SPEED, true);
+            Bus bus = new Bus(i, 0, Constants.BUS_CAPACITY, 0, Constants.BUS_MOVEMENT_INTERVAL, Constants.BUS_SPEED, getRandomInt(), true);
             Thread threadBus = new Thread(bus);
 
             threadBus.start();
         }
+    }
+
+    private static int getRandomInt() {
+        Random random = new Random();
+
+        return random.nextInt(2) + 1;
     }
 }
