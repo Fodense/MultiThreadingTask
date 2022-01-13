@@ -16,7 +16,6 @@ public class Bus implements Runnable {
     private int name;
     private int maxCapacityBus;
     private int countPassenger;
-    private int movementInterval;
     private int travelSpeed;
     private int route;
     private boolean flag2; //fixed DeadLock
@@ -25,7 +24,7 @@ public class Bus implements Runnable {
     public Bus() {
     }
 
-    public Bus(int name, int maxCapacityBus, int countPassenger, int travelSpeed, int route, boolean flag2, boolean direction) throws InterruptedException {
+    public Bus(int name, int maxCapacityBus, int countPassenger, int travelSpeed, int route, boolean flag2, boolean direction) {
         log.info("Автобус " + name + " поехал; " + "Мест " + maxCapacityBus + "; Скорость " + travelSpeed + "; Маршрут " + route);
 
         this.name = name;
@@ -165,10 +164,6 @@ public class Bus implements Runnable {
 
     public int getCountPassenger() {
         return countPassenger;
-    }
-
-    public int getMovementInterval() {
-        return movementInterval;
     }
 
     public int getTravelSpeed() {
