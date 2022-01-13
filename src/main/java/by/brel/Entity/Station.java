@@ -7,10 +7,12 @@ import java.util.Objects;
 public class Station {
 
     private static final Logger log = Logger.getLogger(Station.class);
+
     private Bus bus;
     private final Object monitor = new Object();
 
     private int numberStation;
+    private int countPassengersInStation;
 
     public Station() {
     }
@@ -19,17 +21,20 @@ public class Station {
         this.numberStation = numberStation;
     }
 
-    public synchronized Bus passengersInStation(int name, int zoneStart, int number) {
-        log.info("Пассажир " + name + " прибыл на остановку " +  numberStation + " и ожидает автобус " + number);
+    public synchronized Bus passengersInStation(int name, int route) {
+        log.info("Пассажир " + name + " прибыл на остановку " +  getNumberStation() + "; Маршрут " + route);
 
         boolean flag = true;
 
         try {
+            this.countPassengersInStation++;
+
             while (flag) {
                 this.wait();
 
-                if (bus.getMovementInterval() == number && bus.getFreePlacesBus() > 0) {
+                if (bus.getRoute() == route && bus.getFreePlacesBus() > 0) {
                     bus.addPassenger();
+                    this.countPassengersInStation--;
 
                     flag = false;
 
@@ -37,7 +42,12 @@ public class Station {
 
                 }
 
-                bus.notifyBus();
+                if (bus.getFreePlacesBus() == 0 || this.countPassengersInStation == 0) {
+                    bus.notifyBus();
+
+                } else if (bus.getCountPassenger() == 0) {
+                    bus.waitBus();
+                }
 
                 if (!flag) {
                     return bus;
@@ -63,6 +73,7 @@ public class Station {
 
             this.bus = bus;
             bus.setFlag2(false);
+
             this.notifyAll();
         }
     }

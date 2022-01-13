@@ -1,7 +1,10 @@
 package by.brel.Entity;
 
+import by.brel.Utils.Util;
 import by.brel.Сonstants.Constants;
 import org.apache.log4j.Logger;
+
+import java.util.List;
 
 public class Bus implements Runnable {
 
@@ -11,26 +14,28 @@ public class Bus implements Runnable {
     private final Object monitor = new Object();
 
     private int name;
-    private int zoneStart;
     private int maxCapacityBus;
     private int countPassenger;
     private int movementInterval;
     private int travelSpeed;
-    private boolean flag2;
+    private int route;
+    private boolean flag2; //fixed DeadLock
+    private boolean direction;
 
     public Bus() {
     }
 
-    public Bus(int name, int zoneStart, int maxCapacityBus, int countPassenger, int movementInterval, int travelSpeed, boolean flag2) {
-        log.info("Автобус " + name + " поехал; " + "Мест " + maxCapacityBus + "; Скорость " + travelSpeed + "; Маршрут " + movementInterval);
+    public Bus(int name, int maxCapacityBus, int countPassenger, int movementInterval, int travelSpeed, int route, boolean flag2, boolean direction) {
+        log.info("Автобус " + name + " поехал; " + "Мест " + maxCapacityBus + "; Скорость " + travelSpeed + "; Маршрут " + route);
 
         this.name = name;
-        this.zoneStart = zoneStart;
         this.maxCapacityBus = maxCapacityBus;
         this.countPassenger = countPassenger;
         this.movementInterval = movementInterval;
         this.travelSpeed = travelSpeed;
+        this.route = route;
         this.flag2 = flag2;
+        this.direction = direction;
     }
 
     @Override
@@ -38,19 +43,30 @@ public class Bus implements Runnable {
         try {
             int countStations = Constants.STATIONS_LIST.size();
 
-            for (int zone = getZoneStart(), interval = getMovementInterval(); true;) {
-                if (zone == countStations) {
-                    zone = 0;
+            for (int i = 0; true;) {
+                int interval = getRoute();
+
+                if (i >= countStations) {
+                    this.direction = Util.getRandomBoolean();
+
+                    i = 0;
                 }
 
-                if (zone == -1) {
-                    zone = countStations - 1;
+                if (isDirection() && interval % 2 == 0) {
+                    interval = 1;
+                    this.direction = Util.getRandomBoolean();
+                }
+
+                if (!isDirection()) {
+                    interval = 2;
+                    this.direction = Util.getRandomBoolean();
                 }
 
                 travelNextStation();
-                moveOnStation(zone);
+                moveOnStation(i);
 
-                zone += interval;
+                i += interval;
+
             }
 
         } catch (InterruptedException e) {
@@ -70,7 +86,7 @@ public class Bus implements Runnable {
                 if (this.getStation().getNumberStation() == zoneEnd) {
                     this.removePassenger();
 
-                    log.info("Пассажир " + name + " вышел");
+                    log.info("Пассажир " + name + " вышел из автобуса " + getName());
 
                     flag = false;
                 }
@@ -126,7 +142,7 @@ public class Bus implements Runnable {
 
     private void moveOnStation(int i) throws InterruptedException {
         synchronized (this.monitor) {
-            log.info("Автобус " + getName() + " движется на остановку №" + (i + 1));
+            log.info("Автобус " + getName() + " движется на остановку №" + (i + 1) + "; Пассажиров " + getCountPassenger() + "; Мест " + getFreePlacesBus());
 
             Constants.STATIONS_LIST.get(i).busInStation(this);
         }
@@ -142,10 +158,6 @@ public class Bus implements Runnable {
 
     public void setStation(Station station) {
         this.station = station;
-    }
-
-    public int getZoneStart() {
-        return zoneStart;
     }
 
     public int getMaxCapacityBus() {
@@ -164,11 +176,27 @@ public class Bus implements Runnable {
         return travelSpeed;
     }
 
+    public int getRoute() {
+        return route;
+    }
+
+    public void setRoute(int route) {
+        this.route = route;
+    }
+
     public boolean isFlag2() {
         return flag2;
     }
 
     public void setFlag2(boolean flag2) {
         this.flag2 = flag2;
+    }
+
+    public boolean isDirection() {
+        return direction;
+    }
+
+    public void setDirection(boolean direction) {
+        this.direction = direction;
     }
 }

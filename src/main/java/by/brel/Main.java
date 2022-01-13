@@ -3,6 +3,7 @@ package by.brel;
 import by.brel.Entity.Bus;
 import by.brel.Entity.Passenger;
 import by.brel.Entity.Station;
+import by.brel.Utils.Util;
 import by.brel.Сonstants.Constants;
 
 import java.io.IOException;
@@ -33,9 +34,6 @@ public class Main {
             int zoneStart = random.nextInt(Constants.STATIONS_COUNT_MAX) + 1;
             int zoneStop = random.nextInt(Constants.STATIONS_COUNT_MAX) + 1;
 
-//            int zoneStart = random.nextInt(Constants.STATIONS_COUNT_MAX) + 1;
-//            int zoneStop = getRandomInt(zoneStart, Constants.STATIONS_COUNT_MAX, zoneStart);
-
             Passenger passenger = new Passenger(i, zoneStart, zoneStop);
             Thread threadPassenger = new Thread(passenger);
 
@@ -43,23 +41,18 @@ public class Main {
         }
     }
 
-//    private static int getRandomInt(int min, int max, int exp) {
-//        boolean flag = true;
-//
-//        while (flag) {
-//            int result = (int) (Math.random() * (max - min + 1) + min);
-//
-//            if (result != exp) {
-//                return result;
-//            }
-//        }
-//
-//        return max;
-//    }
-
     private static void createBus() throws InterruptedException {
         for (int i = 1; i <= Constants.BUS_COUNT_MAX; i++) {
-            Bus bus = new Bus(i, 0, Constants.BUS_CAPACITY, 0, Constants.BUS_MOVEMENT_INTERVAL, Constants.BUS_SPEED, true);
+            Bus bus = new Bus(
+                    i,
+                    Constants.BUS_CAPACITY,
+                    0,
+                    Constants.BUS_MOVEMENT_INTERVAL,
+                    Constants.BUS_SPEED,
+                    Util.getRandomInt(Constants.BUS_ROUTE_MAX),
+                    true,
+                    Util.getRandomBoolean()
+            );
             Thread threadBus = new Thread(bus);
 
             threadBus.start();
