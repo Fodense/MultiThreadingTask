@@ -25,13 +25,12 @@ public class Bus implements Runnable {
     public Bus() {
     }
 
-    public Bus(int name, int maxCapacityBus, int countPassenger, int movementInterval, int travelSpeed, int route, boolean flag2, boolean direction) {
+    public Bus(int name, int maxCapacityBus, int countPassenger, int travelSpeed, int route, boolean flag2, boolean direction) throws InterruptedException {
         log.info("Автобус " + name + " поехал; " + "Мест " + maxCapacityBus + "; Скорость " + travelSpeed + "; Маршрут " + route);
 
         this.name = name;
         this.maxCapacityBus = maxCapacityBus;
         this.countPassenger = countPassenger;
-        this.movementInterval = movementInterval;
         this.travelSpeed = travelSpeed;
         this.route = route;
         this.flag2 = flag2;
