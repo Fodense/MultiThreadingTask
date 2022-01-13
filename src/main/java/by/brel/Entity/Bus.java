@@ -16,7 +16,6 @@ public class Bus implements Runnable {
     private int name;
     private int maxCapacityBus;
     private int countPassenger;
-    private int movementInterval;
     private int travelSpeed;
     private int route;
     private boolean flag2; //fixed DeadLock
@@ -25,13 +24,12 @@ public class Bus implements Runnable {
     public Bus() {
     }
 
-    public Bus(int name, int maxCapacityBus, int countPassenger, int movementInterval, int travelSpeed, int route, boolean flag2, boolean direction) {
+    public Bus(int name, int maxCapacityBus, int countPassenger, int travelSpeed, int route, boolean flag2, boolean direction) {
         log.info("Автобус " + name + " поехал; " + "Мест " + maxCapacityBus + "; Скорость " + travelSpeed + "; Маршрут " + route);
 
         this.name = name;
         this.maxCapacityBus = maxCapacityBus;
         this.countPassenger = countPassenger;
-        this.movementInterval = movementInterval;
         this.travelSpeed = travelSpeed;
         this.route = route;
         this.flag2 = flag2;
@@ -166,10 +164,6 @@ public class Bus implements Runnable {
 
     public int getCountPassenger() {
         return countPassenger;
-    }
-
-    public int getMovementInterval() {
-        return movementInterval;
     }
 
     public int getTravelSpeed() {

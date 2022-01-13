@@ -43,11 +43,12 @@ public class Main {
 
     private static void createBus() throws InterruptedException {
         for (int i = 1; i <= Constants.BUS_COUNT_MAX; i++) {
+            Thread.sleep(Constants.BUS_MOVEMENT_INTERVAL);
+
             Bus bus = new Bus(
                     i,
                     Constants.BUS_CAPACITY,
                     0,
-                    Constants.BUS_MOVEMENT_INTERVAL,
                     Constants.BUS_SPEED,
                     Util.getRandomInt(Constants.BUS_ROUTE_MAX),
                     true,
