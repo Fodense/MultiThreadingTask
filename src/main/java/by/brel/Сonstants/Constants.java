@@ -7,10 +7,13 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Properties;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Constants {
 
     public static ArrayList<Station> STATIONS_LIST = new ArrayList<>();
+
+    public static AtomicInteger livePassengers = new AtomicInteger(0);
 
     public static final int PASSENGERS_COUNT_MAX    = Integer.parseInt(getProperties().getProperty("passengers.count.max"));              // Общее число пассажиров
     public static final int STATIONS_COUNT_MAX      = Integer.parseInt(getProperties().getProperty("stations.count.max"));                // Количество остановок в одну сторону (т.о. все остановки парные)

@@ -15,7 +15,7 @@ public class Main {
         init();
     }
 
-    private static void init() throws InterruptedException {
+    public static void init() throws InterruptedException {
         createStation();
         createPassenger();
         createBus();
@@ -29,6 +29,8 @@ public class Main {
 
     private static void createPassenger() {
         for (int i = 1; i <= Constants.PASSENGERS_COUNT_MAX; i++) {
+            Constants.livePassengers.incrementAndGet();
+
             Random random = new Random();
 
             int zoneStart = random.nextInt(Constants.STATIONS_COUNT_MAX) + 1;

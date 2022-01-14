@@ -82,11 +82,16 @@ public class Bus implements Runnable {
                 this.wait();
 
                 if (this.getStation().getNumberStation() == zoneEnd) {
+                    Constants.livePassengers.decrementAndGet();
                     this.removePassenger();
 
                     log.info("Пассажир " + name + " вышел из автобуса " + getName());
 
                     flag = false;
+
+                    if (Constants.livePassengers.get() == 0) {
+                        System.exit(0);
+                    }
                 }
 
                 if (this.getCountPassenger() == 0) {
