@@ -21,13 +21,13 @@ public class Main {
         createBus();
     }
 
-    private static void createStation() {
+    public static void createStation() {
         for (int i = 1; i <= Constants.STATIONS_COUNT_MAX; i++) {
             Constants.STATIONS_LIST.add(new Station(i));
         }
     }
 
-    private static void createPassenger() {
+    public static void createPassenger() {
         for (int i = 1; i <= Constants.PASSENGERS_COUNT_MAX; i++) {
             Constants.livePassengers.incrementAndGet();
 
@@ -43,7 +43,7 @@ public class Main {
         }
     }
 
-    private static void createBus() throws InterruptedException {
+    public static void createBus() throws InterruptedException {
         for (int i = 1; i <= Constants.BUS_COUNT_MAX; i++) {
             Thread.sleep(Constants.BUS_MOVEMENT_INTERVAL);
 

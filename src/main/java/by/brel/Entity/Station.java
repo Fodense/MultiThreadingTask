@@ -13,6 +13,8 @@ public class Station {
 
     private int numberStation;
     private int countPassengersInStation;
+    private int x;
+    private int y;
 
     public Station() {
     }
@@ -80,5 +82,33 @@ public class Station {
 
     public int getNumberStation() {
         return numberStation;
+    }
+
+    public void setNumberStation(int numberStation) {
+        this.numberStation = numberStation;
+    }
+
+    public int getCountPassengersInStation() {
+        return countPassengersInStation;
+    }
+
+    public void setCountPassengersInStation(int countPassengersInStation) {
+        this.countPassengersInStation = countPassengersInStation;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
     }
 }

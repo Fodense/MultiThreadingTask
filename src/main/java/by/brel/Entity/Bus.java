@@ -90,7 +90,7 @@ public class Bus implements Runnable {
                     flag = false;
 
                     if (Constants.livePassengers.get() == 0) {
-                        System.exit(0);
+//                        System.exit(0);
                     }
                 }
 
