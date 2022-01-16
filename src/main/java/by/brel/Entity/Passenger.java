@@ -24,7 +24,7 @@ public class Passenger implements Runnable {
 
     @Override
     public void run() {
-        Constants.STATIONS_LIST
+        Constants.STATIONS_COUNT_LIST
                 .get(getZoneStart() - 1)
                 .passengersInStation(getName(), 1)
                 .passengersInBus(getName(), getZoneStop());

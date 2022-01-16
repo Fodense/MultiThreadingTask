@@ -4,8 +4,6 @@ import by.brel.Utils.Util;
 import by.brel.Сonstants.Constants;
 import org.apache.log4j.Logger;
 
-import java.util.List;
-
 public class Bus implements Runnable {
 
     private static final Logger log = Logger.getLogger(Bus.class);
@@ -20,6 +18,8 @@ public class Bus implements Runnable {
     private int route;
     private boolean flag2; //fixed DeadLock
     private boolean direction;
+    private int x;
+    private int y;
 
     public Bus() {
     }
@@ -39,7 +39,7 @@ public class Bus implements Runnable {
     @Override
     public void run() {
         try {
-            int countStations = Constants.STATIONS_LIST.size();
+            int countStations = Constants.STATIONS_COUNT_LIST.size();
 
             for (int i = 0; true;) {
                 int interval = getRoute();
@@ -147,7 +147,7 @@ public class Bus implements Runnable {
         synchronized (this.monitor) {
             log.info("Автобус " + getName() + " движется на остановку №" + (i + 1) + "; Пассажиров " + getCountPassenger() + "; Мест " + getFreePlacesBus());
 
-            Constants.STATIONS_LIST.get(i).busInStation(this);
+            Constants.STATIONS_COUNT_LIST.get(i).busInStation(this);
         }
     }
 
@@ -197,5 +197,21 @@ public class Bus implements Runnable {
 
     public void setDirection(boolean direction) {
         this.direction = direction;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
     }
 }

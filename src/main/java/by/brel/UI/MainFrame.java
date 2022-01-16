@@ -10,20 +10,22 @@ import java.awt.event.ActionListener;
 
 public class MainFrame extends JFrame {
 
+    public static Constants constants;
+
     private JPanel panel;
 
-    private static final JLabel jLabel1 = new JLabel("Общее кол-во пассажиров", SwingConstants.LEFT);
-    private static final JTextField passengerCountMax = new JTextField(Integer.toString(Constants.PASSENGERS_COUNT_MAX),1);
-    private static final JLabel jLabel2 = new JLabel("Кол-во остановок", SwingConstants.LEFT);
-    private static final JTextField stationsCountMax = new JTextField(Integer.toString(Constants.STATIONS_COUNT_MAX), 1);
-    private static final JLabel jLabel3 = new JLabel("Количество автобусов", SwingConstants.LEFT);
-    private static final JTextField busCountMax = new JTextField(Integer.toString(Constants.BUS_COUNT_MAX), 1);
-    private static final JLabel jLabel4 = new JLabel("Вместимость каждого автобуса", SwingConstants.LEFT);
-    private static final JTextField busCapacity = new JTextField(Integer.toString(Constants.BUS_CAPACITY), 1);
-    private static final JLabel jLabel5 = new JLabel("Интервал между автобусами", SwingConstants.LEFT);
-    private static final JTextField busInterval = new JTextField(Integer.toString(Constants.BUS_MOVEMENT_INTERVAL), 1);
-    private static final JLabel jLabel6 = new JLabel("Скорость движения", SwingConstants.LEFT);
-    private static final JTextField busSpeed = new JTextField(Integer.toString(Constants.BUS_SPEED), 1);
+    private static JLabel jLabel1;
+    private static JTextField passengerCountMax;
+    private static JLabel jLabel2;
+    private static JTextField stationsCountMax;
+    private static JLabel jLabel3;
+    private static JTextField busCountMax;
+    private static JLabel jLabel4;
+    private static JTextField busCapacity;
+    private static JLabel jLabel5;
+    private static JTextField busInterval;
+    private static JLabel jLabel6;
+    private static JTextField busSpeed;
 
     public static void main(String[] args) {
         new MainFrame();
@@ -37,6 +39,8 @@ public class MainFrame extends JFrame {
     private void initContainer() {
         Container container = getContentPane();
         container.setLayout(new GridLayout(0, 2));
+
+        initStartingParameters();
 
         container.add(jLabel1);
         container.add(passengerCountMax);
@@ -58,6 +62,21 @@ public class MainFrame extends JFrame {
         setContentPane(container);
     }
 
+    private void initStartingParameters() {
+        jLabel1 = new JLabel("Общее кол-во пассажиров", SwingConstants.LEFT);
+        passengerCountMax = new JTextField(Integer.toString(Constants.PASSENGERS_COUNT_MAX),1);
+        jLabel2 = new JLabel("Кол-во остановок", SwingConstants.LEFT);
+        stationsCountMax = new JTextField(Integer.toString(Constants.STATIONS_COUNT_MAX), 1);
+        jLabel3 = new JLabel("Количество автобусов", SwingConstants.LEFT);
+        busCountMax = new JTextField(Integer.toString(Constants.BUS_COUNT_MAX), 1);
+        jLabel4 = new JLabel("Вместимость каждого автобуса", SwingConstants.LEFT);
+        busCapacity = new JTextField(Integer.toString(Constants.BUS_CAPACITY), 1);
+        jLabel5 = new JLabel("Интервал между автобусами", SwingConstants.LEFT);
+        busInterval = new JTextField(Integer.toString(Constants.BUS_MOVEMENT_INTERVAL), 1);
+        jLabel6 = new JLabel("Скорость движения", SwingConstants.LEFT);
+        busSpeed = new JTextField(Integer.toString(Constants.BUS_SPEED), 1);
+    }
+
     private void initFrame() {
         pack();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -71,38 +90,31 @@ public class MainFrame extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            int PASSENGERS_COUNT_MAX = 0;
-            int STATIONS_COUNT_MAX = 0;
-            int BUS_COUNT_MAX = 0;
-            int BUS_CAPACITY = 0;
-            int BUS_MOVEMENT_INTERVAL = 0;
-            int BUS_SPEED = 0;
-            int BUS_ROUTE_MAX = 1;
-            
-            try {
-            PASSENGERS_COUNT_MAX = Integer.parseInt(passengerCountMax.getText());
-            STATIONS_COUNT_MAX = Integer.parseInt(stationsCountMax.getText());
-            BUS_COUNT_MAX = Integer.parseInt(busCountMax.getText());
-            BUS_CAPACITY = Integer.parseInt(busCapacity.getText());
-            BUS_MOVEMENT_INTERVAL = Integer.parseInt(busInterval.getText());
-            BUS_SPEED = Integer.parseInt(busSpeed.getText());
+            initParameters();
 
-            } catch (NumberFormatException exception) {
-                JOptionPane.showMessageDialog(null,"Некорректный ввод!");
+            try {
+                Main.init();
+
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
             }
 
-            Main.createStation();
-            Main.createPassenger();
+            Thread thread = new Thread(
+                    new MoveFrame(
+                            constants
+                    )
+            );
 
-            new MoveFrame(
-                     PASSENGERS_COUNT_MAX,
-                     STATIONS_COUNT_MAX,
-                     BUS_COUNT_MAX,
-                     BUS_CAPACITY,
-                     BUS_MOVEMENT_INTERVAL,
-                     BUS_SPEED,
-                     BUS_ROUTE_MAX
-             );
+            thread.start();
         }
+    }
+
+    private static void initParameters(){
+        constants.PASSENGERS_COUNT_MAX      = Integer.parseInt(passengerCountMax.getText());
+        constants.STATIONS_COUNT_MAX        = Integer.parseInt(stationsCountMax.getText());
+        constants.BUS_COUNT_MAX             = Integer.parseInt(busCountMax.getText());
+        constants.BUS_CAPACITY              = Integer.parseInt(busCapacity.getText());
+        constants.BUS_MOVEMENT_INTERVAL     = Integer.parseInt(busInterval.getText());
+        constants.BUS_SPEED                 = Integer.parseInt(busSpeed.getText());
     }
 }
