@@ -14,17 +14,17 @@ public class Bus implements Runnable {
     private int name;
     private int maxCapacityBus;
     private int countPassenger;
-    private int travelSpeed;
+    private double travelSpeed;
     private int route;
     private boolean flag2; //fixed DeadLock
     private boolean direction;
-    private int x;
+    private double x;
     private int y;
 
     public Bus() {
     }
 
-    public Bus(int name, int maxCapacityBus, int countPassenger, int travelSpeed, int route, boolean flag2, boolean direction) {
+    public Bus(int name, int maxCapacityBus, int countPassenger, double travelSpeed, int route, boolean flag2, boolean direction) {
         log.info("Автобус " + name + " поехал; " + "Мест " + maxCapacityBus + "; Скорость " + travelSpeed + "; Маршрут " + route);
 
         this.name = name;
@@ -140,7 +140,8 @@ public class Bus implements Runnable {
     }
 
     private void travelNextStation() throws InterruptedException {
-        Thread.sleep(getTravelSpeed());
+        Thread.sleep((long) getTravelSpeed());
+        x = x + travelSpeed;
     }
 
     private void moveOnStation(int i) throws InterruptedException {
@@ -171,7 +172,7 @@ public class Bus implements Runnable {
         return countPassenger;
     }
 
-    public int getTravelSpeed() {
+    public double getTravelSpeed() {
         return travelSpeed;
     }
 
@@ -199,12 +200,8 @@ public class Bus implements Runnable {
         this.direction = direction;
     }
 
-    public int getX() {
+    public double getX() {
         return x;
-    }
-
-    public void setX(int x) {
-        this.x = x;
     }
 
     public int getY() {

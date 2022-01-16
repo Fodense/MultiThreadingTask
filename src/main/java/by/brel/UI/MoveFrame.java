@@ -75,11 +75,9 @@ public class MoveFrame extends JFrame implements Runnable {
             ); //№
         }
 
-        int x = 0;
+        int x = 100;
         for (Bus bus : Constants.BUS_COUNT_LIST) {
-            x += 30;
-
-            g.drawRect(bus.getX() + x + 102, 152, 20, 10);
+            g.drawRect((int) (bus.getX() / x) + 102, 152, 20, 10);
         }
     }
 

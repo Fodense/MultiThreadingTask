@@ -74,7 +74,7 @@ public class MainFrame extends JFrame {
         jLabel5 = new JLabel("Интервал между автобусами", SwingConstants.LEFT);
         busInterval = new JTextField(Integer.toString(Constants.BUS_MOVEMENT_INTERVAL), 1);
         jLabel6 = new JLabel("Скорость движения", SwingConstants.LEFT);
-        busSpeed = new JTextField(Integer.toString(Constants.BUS_SPEED), 1);
+        busSpeed = new JTextField(Double.toString(Constants.BUS_SPEED), 1);
     }
 
     private void initFrame() {
@@ -116,6 +116,6 @@ public class MainFrame extends JFrame {
         constants.BUS_COUNT_MAX             = Integer.parseInt(busCountMax.getText());
         constants.BUS_CAPACITY              = Integer.parseInt(busCapacity.getText());
         constants.BUS_MOVEMENT_INTERVAL     = Integer.parseInt(busInterval.getText());
-        constants.BUS_SPEED                 = Integer.parseInt(busSpeed.getText());
+        constants.BUS_SPEED                 = Double.parseDouble(busSpeed.getText());
     }
 }
