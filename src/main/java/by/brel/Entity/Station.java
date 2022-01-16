@@ -66,7 +66,10 @@ public class Station {
     public void busInStation(Bus bus) {
         synchronized (this) {
 
-            bus.setStation(this);
+            // Возможен nullPointer
+            if (this.x >= bus.getX()) {
+                bus.setStation(this);
+            }
 
             if (bus.getCountPassenger() != 0) {
                 bus.notifyAllPassengerInBus();

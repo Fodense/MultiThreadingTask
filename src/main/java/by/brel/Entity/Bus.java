@@ -90,7 +90,7 @@ public class Bus implements Runnable {
                     flag = false;
 
                     if (Constants.livePassengers.get() == 0) {
-//                        System.exit(0);
+                        System.exit(0);
                     }
                 }
 
@@ -140,7 +140,7 @@ public class Bus implements Runnable {
     }
 
     private void travelNextStation() throws InterruptedException {
-        Thread.sleep((long) getTravelSpeed());
+        Thread.sleep(2000);
         x = x + travelSpeed;
     }
 
