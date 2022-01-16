@@ -94,6 +94,7 @@ public class MainFrame extends JFrame {
 
             try {
                 Main.init();
+                Main.startPassenger();
 
             } catch (InterruptedException ex) {
                 ex.printStackTrace();

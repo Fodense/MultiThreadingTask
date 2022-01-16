@@ -19,11 +19,6 @@ public class MoveFrame extends JFrame implements Runnable {
         initMoveFrame();
     }
 
-
-    public static void main(String[] args) {
-//        new MoveFrame();
-    }
-
     private void initContainerMoveFrame() {
         jButton = new JButton("Старт");
         jButton.addActionListener(new StartEventListener());
