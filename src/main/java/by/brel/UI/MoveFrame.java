@@ -70,7 +70,7 @@ public class MoveFrame extends JFrame implements Runnable {
         g.setColor(Color.BLACK);
 
         //Линия
-        g.drawLine(100, 150, getContentPane().getWidth() - 100, 150);
+        g.drawLine(100, 150, getContentPane().getWidth(), 150);
 
         //Прямоугольник
 //        g.drawRect(100, 150, getContentPane().getWidth() - 200, getContentPane().getHeight() / 2);
