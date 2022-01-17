@@ -50,7 +50,7 @@ public class Bus implements Runnable {
                     i = 0;
 
                     if (Constants.livePassengers.get() == 0) {
-                        Thread.sleep(10000);
+                        Thread.sleep(5000);
 
                         System.exit(0);
                     }

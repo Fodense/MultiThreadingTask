@@ -3,6 +3,7 @@ package by.brel;
 import by.brel.Entity.Bus;
 import by.brel.Entity.Passenger;
 import by.brel.Entity.Station;
+import by.brel.UI.MainFrame;
 import by.brel.Utils.Util;
 import by.brel.Сonstants.Constants;
 
@@ -12,9 +13,14 @@ import java.util.Random;
 public class Main {
 
     public static void main(String[] args) throws IOException, InterruptedException {
-        init();
-        startPassenger();
-        startAll();
+        if (Constants.START_MODE == 1) {
+            init();
+            startPassenger();
+            startAll();
+
+        } else {
+            MainFrame.main();
+        }
     }
 
     public static void startAll(){

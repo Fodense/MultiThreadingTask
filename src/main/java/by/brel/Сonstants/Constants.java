@@ -20,6 +20,7 @@ public class Constants {
 
     public static AtomicInteger livePassengers = new AtomicInteger(0);
 
+    public static int START_MODE              = Integer.parseInt(getProperties().getProperty("working.type"));                      // Вариант запуска
     public static int PASSENGERS_COUNT_MAX    = Integer.parseInt(getProperties().getProperty("passengers.count.max"));              // Общее число пассажиров
     public static int STATIONS_COUNT_MAX      = Integer.parseInt(getProperties().getProperty("stations.count.max"));                // Количество остановок в одну сторону (т.о. все остановки парные)
     public static int BUS_COUNT_MAX           = Integer.parseInt(getProperties().getProperty("bus.count.max"));                     // Количество автобусов

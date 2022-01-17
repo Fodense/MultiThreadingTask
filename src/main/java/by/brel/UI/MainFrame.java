@@ -27,7 +27,7 @@ public class MainFrame extends JFrame {
     private static JLabel jLabel6;
     private static JTextField busSpeed;
 
-    public static void main(String[] args) {
+    public static void main() {
         new MainFrame();
     }
 
@@ -55,9 +55,13 @@ public class MainFrame extends JFrame {
         container.add(jLabel6);
         container.add(busSpeed);
 
-        JButton button = new JButton("Создать мир");
-        button.addActionListener(new CreateWorldEventListener());
-        container.add(button).setSize(500, 0);
+        JButton buttonStart = new JButton("Создать мир");
+        buttonStart.addActionListener(new CreateWorldEventListener());
+        container.add(buttonStart).setSize(500, 0);
+
+        JButton buttonClose = new JButton("Выход");
+        buttonClose.addActionListener(new CloseEventListener());
+        container.add(buttonClose).setSize(500, 0);
 
         setContentPane(container);
     }
@@ -105,6 +109,13 @@ public class MainFrame extends JFrame {
             );
 
             thread.start();
+        }
+    }
+
+    static class CloseEventListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.exit(0);
         }
     }
 

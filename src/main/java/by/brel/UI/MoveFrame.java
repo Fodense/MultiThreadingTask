@@ -62,8 +62,12 @@ public class MoveFrame extends JFrame implements Runnable {
     public void paint(Graphics g) {
         super.paint(g);
 
+        if (Constants.livePassengers.get() == 0) {
+            g.setColor(Color.RED);
+        }
+        g.drawString("Кол-во живых пассажиров: " + Constants.livePassengers.get(), 15 , 50);
+
         g.setColor(Color.BLACK);
-        g.drawString("Кол-во живых пассажиров: " + Constants.livePassengers.get(), 10 , 50);
 
         //Линия
         g.drawLine(100, 150, getContentPane().getWidth() - 100, 150);
