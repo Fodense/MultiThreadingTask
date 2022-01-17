@@ -1,33 +1,44 @@
 package by.brel.Entity;
 
+import by.brel.Сonstants.Constants;
 import org.apache.log4j.Logger;
 
 public class Passenger implements Runnable {
 
     private static final Logger log = Logger.getLogger(Passenger.class);
 
+    private int name;
     private int zoneStart;
     private int zoneStop;
-
-    @Override
-    public void run() {
-        log.info("Пассажир " + Thread.currentThread().getName() + " Идёт на остановку №" + zoneStart + " хочет доехать до остановки №" + zoneStop);
-
-        int vector;
-
-        if ((zoneStart - zoneStop) > 0)
-            vector = -1;
-        else
-            vector = 1;
-
-//        Main.stationsList.get(zoneStart).passengerWaitBus(vector).passengersInBus(zoneStop);
-    }
 
     public Passenger() {
     }
 
-    public Passenger(int zoneStart, int zoneStop) {
+    public Passenger(int name, int zoneStart, int zoneStop) {
+        log.info("Пассажир " + name + " идёт на остановку №" + zoneStart + " хочет доехать до остановки №" + zoneStop);
+
+        this.name = name;
         this.zoneStart = zoneStart;
         this.zoneStop = zoneStop;
+    }
+
+    @Override
+    public void run() {
+        Constants.STATIONS_COUNT_LIST
+                .get(getZoneStart() - 1)
+                .passengersInStation(getName(), 1)
+                .passengersInBus(getName(), getZoneStop());
+    }
+
+    public int getName() {
+        return name;
+    }
+
+    public int getZoneStart() {
+        return zoneStart;
+    }
+
+    public int getZoneStop() {
+        return zoneStop;
     }
 }
