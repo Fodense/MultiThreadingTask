@@ -1,5 +1,6 @@
 package by.brel.Entity;
 
+import by.brel.Сonstants.Constants;
 import org.apache.log4j.Logger;
 
 import java.util.Objects;
@@ -9,20 +10,22 @@ public class Station {
     private static final Logger log = Logger.getLogger(Station.class);
 
     private Bus bus;
-    private final Object monitor = new Object();
 
     private int numberStation;
     private int countPassengersInStation;
+    private int x;
+    private int y;
 
     public Station() {
     }
 
-    public Station(int numberStation) {
+    public Station(int numberStation, int x) {
         this.numberStation = numberStation;
+        this.x = x;
     }
 
     public synchronized Bus passengersInStation(int name, int route) {
-        log.info("Пассажир " + name + " прибыл на остановку " +  getNumberStation() + "; Маршрут " + route);
+        log.info("Пассажир " + name + " прибыл на остановку " +  (getNumberStation() + 1) + "; Маршрут " + route);
 
         boolean flag = true;
 
@@ -38,7 +41,7 @@ public class Station {
 
                     flag = false;
 
-                    log.info("Пассажир " + name + " сел в автобус " + bus.getName());
+                    log.info("Пассажир " + name + " сел в автобус " + bus.getName() + " Сел на остановке " + (this.getNumberStation() + 1));
 
                 }
 
@@ -64,7 +67,14 @@ public class Station {
     public void busInStation(Bus bus) {
         synchronized (this) {
 
-            bus.setStation(this);
+            // Возможен nullPointer
+//            if (this.x <= bus.getX()) {
+                bus.setStation(this);
+//            }
+
+//            if (Constants.STATIONS_COUNT_LIST.get(Constants.STATIONS_COUNT_LIST.size() - 1).getX() * Constants.STATIONS_COUNT_LIST.size() <= bus.getX()) {
+//                bus.setX(100);
+//            }
 
             if (bus.getCountPassenger() != 0) {
                 bus.notifyAllPassengerInBus();
@@ -80,5 +90,33 @@ public class Station {
 
     public int getNumberStation() {
         return numberStation;
+    }
+
+    public void setNumberStation(int numberStation) {
+        this.numberStation = numberStation;
+    }
+
+    public int getCountPassengersInStation() {
+        return countPassengersInStation;
+    }
+
+    public void setCountPassengersInStation(int countPassengersInStation) {
+        this.countPassengersInStation = countPassengersInStation;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
     }
 }
