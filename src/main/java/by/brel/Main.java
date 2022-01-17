@@ -28,8 +28,23 @@ public class Main {
     }
 
     public static void createStation() {
-        for (int i = 1; i <= Constants.STATIONS_COUNT_MAX; i++) {
-            Constants.STATIONS_COUNT_LIST.add(new Station(i));
+        for (int i = 0; i < Constants.STATIONS_COUNT_MAX; i++) {
+            if (i == 0) {
+                Constants.STATIONS_COUNT_LIST.add(
+                        new Station(
+                            i,
+                            100
+                        )
+                );
+
+            } else {
+                Constants.STATIONS_COUNT_LIST.add(
+                        new Station(
+                                i,
+                                Constants.STATIONS_COUNT_LIST.get(i - 1).getX() + 100 / Constants.STATIONS_COUNT_MAX
+                        )
+                );
+            }
         }
     }
 

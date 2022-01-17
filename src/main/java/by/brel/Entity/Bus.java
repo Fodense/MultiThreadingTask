@@ -44,21 +44,23 @@ public class Bus implements Runnable {
             for (int i = 0; true;) {
                 int interval = getRoute();
 
-                if (i >= countStations) {
-                    this.direction = Util.getRandomBoolean();
+                if (countStations <= i) {
+//                    this.direction = Util.getRandomBoolean();
+//                    this.setX(0);
 
                     i = 0;
                 }
 
-                if (isDirection() && interval % 2 == 0) {
-                    interval = 1;
-                    this.direction = Util.getRandomBoolean();
-                }
-
-                if (!isDirection()) {
-                    interval = 2;
-                    this.direction = Util.getRandomBoolean();
-                }
+                //Генерирует рандомный маршрут
+//                if (isDirection() && interval % 2 == 0) {
+//                    interval = 1;
+//                    this.direction = Util.getRandomBoolean();
+//                }
+//
+//                if (!isDirection()) {
+//                    interval = 2;
+//                    this.direction = Util.getRandomBoolean();
+//                }
 
                 travelNextStation();
                 moveOnStation(i);
@@ -82,16 +84,12 @@ public class Bus implements Runnable {
                 this.wait();
 
                 if (this.getStation().getNumberStation() == zoneEnd) {
-//                    Constants.livePassengers.decrementAndGet();
+                    Constants.livePassengers.decrementAndGet();
                     this.removePassenger();
 
                     log.info("Пассажир " + name + " вышел из автобуса " + getName());
 
                     flag = false;
-
-                    if (Constants.livePassengers.get() == 0) {
-//                        System.exit(0);
-                    }
                 }
 
                 if (this.getCountPassenger() == 0) {
@@ -140,7 +138,7 @@ public class Bus implements Runnable {
     }
 
     private void travelNextStation() throws InterruptedException {
-        Thread.sleep(2000);
+        Thread.sleep(1000);
     }
 
     private void moveOnStation(int i) throws InterruptedException {
@@ -203,6 +201,10 @@ public class Bus implements Runnable {
 
     public double getX() {
         return x;
+    }
+
+    public void setX(double x) {
+        this.x = x;
     }
 
     public int getY() {

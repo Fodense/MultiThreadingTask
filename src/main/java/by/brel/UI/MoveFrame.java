@@ -12,7 +12,9 @@ import java.awt.event.ActionListener;
 
 public class MoveFrame extends JFrame implements Runnable {
     JPanel jPanel;
-    JButton jButton;
+    JButton jButtonStart;
+    JButton jButtonEnd;
+    static int flag = 0;
 
     public MoveFrame(Constants constants) {
         initContainerMoveFrame();
@@ -20,12 +22,16 @@ public class MoveFrame extends JFrame implements Runnable {
     }
 
     private void initContainerMoveFrame() {
-        jButton = new JButton("Старт");
-        jButton.addActionListener(new StartEventListener());
+        jButtonStart = new JButton("Старт");
+        jButtonStart.addActionListener(new StartEventListener());
+
+        jButtonEnd = new JButton("Выход");
+        jButtonEnd.addActionListener(new EndEventListener());
 
         jPanel = new JPanel();
 
-        jPanel.add(jButton);
+        jPanel.add(jButtonStart);
+        jPanel.add(jButtonEnd);
 
         setContentPane(jPanel);
     }
@@ -36,7 +42,7 @@ public class MoveFrame extends JFrame implements Runnable {
         setTitle("Движуха");
         setSize(1366,768);
         setLocationRelativeTo(null);
-        setResizable(false);
+//        setResizable(false);
         setVisible(true);
     }
 
@@ -52,39 +58,71 @@ public class MoveFrame extends JFrame implements Runnable {
         }
     }
 
-    public void paint(Graphics g){
+    public void paint(Graphics g) {
         super.paint(g);
 
-        g.drawRect(100, 150, getContentPane().getWidth() - 200, getContentPane().getHeight() / 2);
+        //Линия
+        g.drawLine(100, 150, getContentPane().getWidth() - 100, 150);
+
+        //Прямоугольник
+//        g.drawRect(100, 150, getContentPane().getWidth() - 200, getContentPane().getHeight() / 2);
 
         int i = 0;
 
         //Рисуем станции
         for (Station station : Constants.STATIONS_COUNT_LIST) {
-            i += 150;
+            i += 100;
+
             g.drawRect(station.getX() + i, 120, 30, 30);
-            g.drawString(
+
+
+            g.drawString(//Рисуем кол-во пассажиров на станции
                     Integer.toString(station.getCountPassengersInStation()),
                     station.getX() + i + (30 / 2) - 3,
                     118
-            ); //Count Passengers in stations
-            g.drawString(
-                    Integer.toString(station.getNumberStation()),
+            );
+            g.drawString(//№ станции
+                    Integer.toString(station.getNumberStation() + 1),
                     station.getX() + i + (30 / 2) - 3,
                     140
-            ); //№
+            );
         }
 
-        int x = 10;
+        int x = 100;
         for (Bus bus : Constants.BUS_COUNT_LIST) {
-            g.drawRect((int) ((bus.getX() / x) + 102), 152, 20, 10);
+//            bus.setX(Constants.STATIONS_COUNT_LIST.get(j).getX());
+//            g.drawRect((int) ((bus.getX() / x) + 102), 152, 20, 10);
+            g.drawRect((int) (bus.getX() + x), 152, 30, 10);
+        }
+
+
+        //Кнопки
+        if (flag == 1) {
+            jButtonStart.setEnabled(false);
+        }
+
+        if (flag == 2) {
+            jButtonEnd.setBackground(Color.decode("#red"));
+        }
+
+        if (Constants.livePassengers.get() == 0) {
+            flag++;
         }
     }
 
     static class StartEventListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
+            flag++;
+
             Main.startAll();
+        }
+    }
+
+    static class EndEventListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.exit(0);
         }
     }
 

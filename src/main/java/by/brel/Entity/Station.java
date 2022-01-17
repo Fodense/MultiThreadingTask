@@ -1,5 +1,6 @@
 package by.brel.Entity;
 
+import by.brel.Сonstants.Constants;
 import org.apache.log4j.Logger;
 
 import java.util.Objects;
@@ -19,8 +20,9 @@ public class Station {
     public Station() {
     }
 
-    public Station(int numberStation) {
+    public Station(int numberStation, int x) {
         this.numberStation = numberStation;
+        this.x = x;
     }
 
     public synchronized Bus passengersInStation(int name, int route) {
@@ -67,9 +69,12 @@ public class Station {
         synchronized (this) {
 
             // Возможен nullPointer
-//            if (this.x >= bus.getX()) {
+            if (bus.getX() >= this.x) {
                 bus.setStation(this);
-//            }
+            }
+            if (bus.getX() >= Constants.STATIONS_COUNT_LIST.get(Constants.STATIONS_COUNT_LIST.size() - 1).getX() * Constants.STATIONS_COUNT_LIST.size()) {
+                bus.setX(100);
+            }
 
             if (bus.getCountPassenger() != 0) {
                 bus.notifyAllPassengerInBus();
