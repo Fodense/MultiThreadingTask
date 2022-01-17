@@ -7,9 +7,6 @@ import by.brel.Utils.Util;
 import by.brel.Сonstants.Constants;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.Random;
 
 public class Main {
@@ -55,16 +52,6 @@ public class Main {
         }
     }
 
-    public static void startPassenger() {
-        Thread[] threadsPassenger = new Thread[Constants.PASSENGER_COUNT_LIST.size()];
-
-        for (int i = 0; i < threadsPassenger.length; i++) {
-            threadsPassenger[i] = new Thread(Constants.PASSENGER_COUNT_LIST.get(i));
-
-            threadsPassenger[i].start();
-        }
-    }
-
     public static void createBus() throws InterruptedException {
         for (int i = 1; i <= Constants.BUS_COUNT_MAX; i++) {
             Constants.BUS_COUNT_LIST.add(
@@ -78,6 +65,16 @@ public class Main {
                         Util.getRandomBoolean()
                     )
             );
+        }
+    }
+
+    public static void startPassenger() {
+        Thread[] threadsPassenger = new Thread[Constants.PASSENGER_COUNT_LIST.size()];
+
+        for (int i = 0; i < threadsPassenger.length; i++) {
+            threadsPassenger[i] = new Thread(Constants.PASSENGER_COUNT_LIST.get(i));
+
+            threadsPassenger[i].start();
         }
     }
 

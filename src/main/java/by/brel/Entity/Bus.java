@@ -82,7 +82,7 @@ public class Bus implements Runnable {
                 this.wait();
 
                 if (this.getStation().getNumberStation() == zoneEnd) {
-                    Constants.livePassengers.decrementAndGet();
+//                    Constants.livePassengers.decrementAndGet();
                     this.removePassenger();
 
                     log.info("Пассажир " + name + " вышел из автобуса " + getName());
@@ -90,7 +90,7 @@ public class Bus implements Runnable {
                     flag = false;
 
                     if (Constants.livePassengers.get() == 0) {
-                        System.exit(0);
+//                        System.exit(0);
                     }
                 }
 
@@ -141,11 +141,12 @@ public class Bus implements Runnable {
 
     private void travelNextStation() throws InterruptedException {
         Thread.sleep(2000);
-        x = x + travelSpeed;
     }
 
     private void moveOnStation(int i) throws InterruptedException {
         synchronized (this.monitor) {
+            x = x + travelSpeed;
+
             log.info("Автобус " + getName() + " движется на остановку №" + (i + 1) + "; Пассажиров " + getCountPassenger() + "; Мест " + getFreePlacesBus());
 
             Constants.STATIONS_COUNT_LIST.get(i).busInStation(this);

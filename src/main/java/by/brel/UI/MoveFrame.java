@@ -43,7 +43,7 @@ public class MoveFrame extends JFrame implements Runnable {
     public void run(){
         while (true){
             try {
-                Thread.sleep(200);
+                Thread.sleep(300);
                 repaint();
 
             } catch (InterruptedException e) {
@@ -75,9 +75,9 @@ public class MoveFrame extends JFrame implements Runnable {
             ); //№
         }
 
-        int x = 100;
+        int x = 10;
         for (Bus bus : Constants.BUS_COUNT_LIST) {
-            g.drawRect((int) (bus.getX() / x) + 102, 152, 20, 10);
+            g.drawRect((int) ((bus.getX() / x) + 102), 152, 20, 10);
         }
     }
 

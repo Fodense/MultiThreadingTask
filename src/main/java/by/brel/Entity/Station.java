@@ -67,9 +67,9 @@ public class Station {
         synchronized (this) {
 
             // Возможен nullPointer
-            if (this.x >= bus.getX()) {
+//            if (this.x >= bus.getX()) {
                 bus.setStation(this);
-            }
+//            }
 
             if (bus.getCountPassenger() != 0) {
                 bus.notifyAllPassengerInBus();
