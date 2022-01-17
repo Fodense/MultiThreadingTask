@@ -9,6 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class MoveFrame extends JFrame implements Runnable {
     JPanel jPanel;
@@ -16,7 +17,7 @@ public class MoveFrame extends JFrame implements Runnable {
     JButton jButtonEnd;
     static int flag = 0;
 
-    public MoveFrame(Constants constants) {
+    public MoveFrame() {
         initContainerMoveFrame();
         initMoveFrame();
     }
@@ -61,6 +62,9 @@ public class MoveFrame extends JFrame implements Runnable {
     public void paint(Graphics g) {
         super.paint(g);
 
+        g.setColor(Color.BLACK);
+        g.drawString("Кол-во живых пассажиров: " + Constants.livePassengers.get(), 10 , 50);
+
         //Линия
         g.drawLine(100, 150, getContentPane().getWidth() - 100, 150);
 
@@ -102,7 +106,7 @@ public class MoveFrame extends JFrame implements Runnable {
         }
 
         if (flag == 2) {
-            jButtonEnd.setBackground(Color.decode("#red"));
+            jButtonEnd.setBackground(Color.RED);
         }
 
         if (Constants.livePassengers.get() == 0) {

@@ -10,7 +10,6 @@ public class Station {
     private static final Logger log = Logger.getLogger(Station.class);
 
     private Bus bus;
-    private final Object monitor = new Object();
 
     private int numberStation;
     private int countPassengersInStation;
@@ -26,7 +25,7 @@ public class Station {
     }
 
     public synchronized Bus passengersInStation(int name, int route) {
-        log.info("Пассажир " + name + " прибыл на остановку " +  getNumberStation() + "; Маршрут " + route);
+        log.info("Пассажир " + name + " прибыл на остановку " +  (getNumberStation() + 1) + "; Маршрут " + route);
 
         boolean flag = true;
 
@@ -42,7 +41,7 @@ public class Station {
 
                     flag = false;
 
-                    log.info("Пассажир " + name + " сел в автобус " + bus.getName());
+                    log.info("Пассажир " + name + " сел в автобус " + bus.getName() + " Сел на остановке " + (this.getNumberStation() + 1));
 
                 }
 
@@ -69,12 +68,13 @@ public class Station {
         synchronized (this) {
 
             // Возможен nullPointer
-            if (bus.getX() >= this.x) {
+//            if (this.x <= bus.getX()) {
                 bus.setStation(this);
-            }
-            if (bus.getX() >= Constants.STATIONS_COUNT_LIST.get(Constants.STATIONS_COUNT_LIST.size() - 1).getX() * Constants.STATIONS_COUNT_LIST.size()) {
-                bus.setX(100);
-            }
+//            }
+
+//            if (Constants.STATIONS_COUNT_LIST.get(Constants.STATIONS_COUNT_LIST.size() - 1).getX() * Constants.STATIONS_COUNT_LIST.size() <= bus.getX()) {
+//                bus.setX(100);
+//            }
 
             if (bus.getCountPassenger() != 0) {
                 bus.notifyAllPassengerInBus();

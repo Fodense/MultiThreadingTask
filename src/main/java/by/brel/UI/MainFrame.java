@@ -101,9 +101,7 @@ public class MainFrame extends JFrame {
             }
 
             Thread thread = new Thread(
-                    new MoveFrame(
-                            constants
-                    )
+                    new MoveFrame()
             );
 
             thread.start();

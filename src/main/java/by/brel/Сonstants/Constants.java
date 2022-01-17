@@ -25,7 +25,7 @@ public class Constants {
     public static int BUS_COUNT_MAX           = Integer.parseInt(getProperties().getProperty("bus.count.max"));                     // Количество автобусов
     public static int BUS_CAPACITY            = Integer.parseInt(getProperties().getProperty("bus.capacity"));                      // Вместимость каждого автобуса
     public static int BUS_MOVEMENT_INTERVAL   = Integer.parseInt(getProperties().getProperty("bus.movement.interval"));             // Интервал между автобусами
-    public static double BUS_SPEED            = Double.parseDouble(getProperties().getProperty("bus.speed"));                         // Скорость движения
+    public static double BUS_SPEED            = Double.parseDouble(getProperties().getProperty("bus.speed"));                       // Скорость движения
     public static int BUS_ROUTE_MAX           = Integer.parseInt(getProperties().getProperty("bus.route.max"));                     // Кол-во маршрутов
 
     private static Properties getProperties() {

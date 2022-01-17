@@ -46,12 +46,17 @@ public class Bus implements Runnable {
 
                 if (countStations <= i) {
 //                    this.direction = Util.getRandomBoolean();
-//                    this.setX(0);
-
+                    x = 100;
                     i = 0;
+
+                    if (Constants.livePassengers.get() == 0) {
+                        Thread.sleep(10000);
+
+                        System.exit(0);
+                    }
                 }
 
-                //Генерирует рандомный маршрут
+                //Генерирует рандомный маршрут + строка 48 в файле Bus.java
 //                if (isDirection() && interval % 2 == 0) {
 //                    interval = 1;
 //                    this.direction = Util.getRandomBoolean();
@@ -83,13 +88,15 @@ public class Bus implements Runnable {
             while (flag) {
                 this.wait();
 
-                if (this.getStation().getNumberStation() == zoneEnd) {
+                if (this.getStation().getNumberStation() + 1 == zoneEnd) {
                     Constants.livePassengers.decrementAndGet();
+
                     this.removePassenger();
 
-                    log.info("Пассажир " + name + " вышел из автобуса " + getName());
+                    log.info("Пассажир " + name + " вышел из автобуса " + getName() + " Вышел на остановке " + (this.getStation().getNumberStation() + 1));
 
                     flag = false;
+                    
                 }
 
                 if (this.getCountPassenger() == 0) {
@@ -138,7 +145,7 @@ public class Bus implements Runnable {
     }
 
     private void travelNextStation() throws InterruptedException {
-        Thread.sleep(1000);
+        Thread.sleep(Constants.BUS_MOVEMENT_INTERVAL);
     }
 
     private void moveOnStation(int i) throws InterruptedException {
