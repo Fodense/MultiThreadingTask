@@ -10,6 +10,7 @@ public class Passenger implements Runnable {
     private int name;
     private int zoneStart;
     private int zoneStop;
+    private int route;
 
     public Passenger() {
     }
@@ -24,9 +25,16 @@ public class Passenger implements Runnable {
 
     @Override
     public void run() {
-        Constants.STATIONS_COUNT_LIST
+        if ((getZoneStart() - getZoneStop()) % 2 == 0) {
+            route = 0;
+
+        } else {
+            route = 1;
+        }
+
+        Constants.STATIONS_COUNT_LIST_FIRST_LINE
                 .get(getZoneStart() - 1)
-                .passengersInStation(getName(), 1)
+                .passengersInStation(getName(), route)
                 .passengersInBus(getName(), getZoneStop());
     }
 
@@ -40,5 +48,13 @@ public class Passenger implements Runnable {
 
     public int getZoneStop() {
         return zoneStop;
+    }
+
+    public int getRoute() {
+        return route;
+    }
+
+    public void setRoute(int route) {
+        this.route = route;
     }
 }

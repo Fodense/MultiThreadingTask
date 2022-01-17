@@ -14,7 +14,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class Constants {
 
-    public static List<Station> STATIONS_COUNT_LIST = new ArrayList<>();
+    public static List<Station> STATIONS_COUNT_LIST_FIRST_LINE = new ArrayList<>();
+    public static List<Station> STATIONS_COUNT_LIST_LAST_LINE = new ArrayList<>();
     public static List<Passenger> PASSENGER_COUNT_LIST = new ArrayList<>();
     public static List<Bus> BUS_COUNT_LIST = new ArrayList<>();
 

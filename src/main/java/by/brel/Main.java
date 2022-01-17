@@ -24,30 +24,63 @@ public class Main {
     }
 
     public static void startAll(){
+//        startPassenger();
         startBus();
     }
 
     public static void init() throws InterruptedException {
-        createStation();
         createPassenger();
+        createStation();
         createBus();
     }
 
     public static void createStation() {
         for (int i = 0; i < Constants.STATIONS_COUNT_MAX; i++) {
+
+            int countPassengersInStationsFirstLine = 0;
+            int countPassengersInStationsLastLine = 0;
+
+            for (int j = 0; j < Constants.PASSENGER_COUNT_LIST.size(); j++) {
+                if (Constants.PASSENGER_COUNT_LIST.get(j).getZoneStart() == i && Constants.PASSENGER_COUNT_LIST.get(j).getRoute() == 0) {
+                    countPassengersInStationsFirstLine++;
+                }
+
+                if (Constants.PASSENGER_COUNT_LIST.get(j).getZoneStart() == i && Constants.PASSENGER_COUNT_LIST.get(j).getRoute() == 1) {
+                    countPassengersInStationsLastLine++;
+                }
+            }
+
             if (i == 0) {
-                Constants.STATIONS_COUNT_LIST.add(
+                Constants.STATIONS_COUNT_LIST_FIRST_LINE.add(
                         new Station(
-                            i,
-                            100
+                                i,
+                                100,
+                                countPassengersInStationsFirstLine
+                        )
+                );
+
+                Constants.STATIONS_COUNT_LIST_LAST_LINE.add(
+                        new Station(
+                                i,
+                                100,
+                                countPassengersInStationsLastLine
                         )
                 );
 
             } else {
-                Constants.STATIONS_COUNT_LIST.add(
+                Constants.STATIONS_COUNT_LIST_FIRST_LINE.add(
                         new Station(
                                 i,
-                                Constants.STATIONS_COUNT_LIST.get(i - 1).getX() + 100 / Constants.STATIONS_COUNT_MAX
+                                Constants.STATIONS_COUNT_LIST_FIRST_LINE.get(i - 1).getX() + 100 / Constants.STATIONS_COUNT_MAX,
+                                countPassengersInStationsFirstLine
+                        )
+                );
+
+                Constants.STATIONS_COUNT_LIST_LAST_LINE.add(
+                        new Station(
+                                i,
+                                Constants.STATIONS_COUNT_LIST_LAST_LINE.get(i - 1).getX() + 100 / Constants.STATIONS_COUNT_MAX,
+                                countPassengersInStationsLastLine
                         )
                 );
             }
@@ -61,7 +94,7 @@ public class Main {
             Random random = new Random();
 
             int zoneStart = random.nextInt(Constants.STATIONS_COUNT_MAX) + 1;
-            int zoneStop = random.nextInt(Constants.STATIONS_COUNT_MAX) + 1;
+            int zoneStop = random.nextInt((Constants.STATIONS_COUNT_MAX - zoneStart) + zoneStart) + 1;
 
             Constants.PASSENGER_COUNT_LIST.add(
                     new Passenger(

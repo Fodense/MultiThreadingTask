@@ -1,6 +1,5 @@
 package by.brel.Entity;
 
-import by.brel.Utils.Util;
 import by.brel.Сonstants.Constants;
 import org.apache.log4j.Logger;
 
@@ -39,7 +38,7 @@ public class Bus implements Runnable {
     @Override
     public void run() {
         try {
-            int countStations = Constants.STATIONS_COUNT_LIST.size();
+            int countStations = Constants.STATIONS_COUNT_LIST_FIRST_LINE.size();
 
             for (int i = 0; true;) {
                 int interval = getRoute();
@@ -154,7 +153,7 @@ public class Bus implements Runnable {
 
             log.info("Автобус " + getName() + " движется на остановку №" + (i + 1) + "; Пассажиров " + getCountPassenger() + "; Мест " + getFreePlacesBus());
 
-            Constants.STATIONS_COUNT_LIST.get(i).busInStation(this);
+            Constants.STATIONS_COUNT_LIST_FIRST_LINE.get(i).busInStation(this);
         }
     }
 

@@ -19,7 +19,7 @@ public class Station {
     public Station() {
     }
 
-    public Station(int numberStation, int x) {
+    public Station(int numberStation, int x, int countPassengersInStation) {
         this.numberStation = numberStation;
         this.x = x;
     }
@@ -30,22 +30,22 @@ public class Station {
         boolean flag = true;
 
         try {
-            this.countPassengersInStation++;
+//            this.countPassengersInStation++;
 
             while (flag) {
                 this.wait();
 
                 if (bus.getRoute() == route && bus.getFreePlacesBus() > 0) {
                     bus.addPassenger();
-                    this.countPassengersInStation--;
+//                    this.countPassengersInStation--;
 
                     flag = false;
 
                     log.info("Пассажир " + name + " сел в автобус " + bus.getName() + " Сел на остановке " + (this.getNumberStation() + 1));
-
                 }
 
-                if (bus.getFreePlacesBus() == 0 || this.countPassengersInStation == 0) {
+//                if (bus.getFreePlacesBus() == 0 || this.countPassengersInStation == 0) {
+                if (bus.getFreePlacesBus() == 0) {
                     bus.notifyBus();
 
                 } else if (bus.getCountPassenger() == 0) {
