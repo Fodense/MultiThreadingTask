@@ -34,6 +34,34 @@ public class Main {
         createBus();
     }
 
+    public static void createPassenger() {
+        for (int i = 1; i <= Constants.PASSENGERS_COUNT_MAX; i++) {
+            Constants.livePassengers.incrementAndGet();
+
+            Random random = new Random();
+
+            int zoneStart = random.nextInt(Constants.STATIONS_COUNT_MAX);
+            int zoneStop = random.nextInt((Constants.STATIONS_COUNT_MAX - zoneStart) + zoneStart);
+
+            int route;
+
+            if (zoneStart - zoneStop < 0) {
+                route = 0;
+            } else {
+                route = 1;
+            }
+
+            Constants.PASSENGER_COUNT_LIST.add(
+                    new Passenger(
+                            i,
+                            zoneStart,
+                            zoneStop,
+                            route
+                    )
+            );
+        }
+    }
+
     public static void createStation() {
         for (int i = 0; i < Constants.STATIONS_COUNT_MAX; i++) {
 
@@ -41,6 +69,7 @@ public class Main {
             int countPassengersInStationsLastLine = 0;
 
             for (int j = 0; j < Constants.PASSENGER_COUNT_LIST.size(); j++) {
+                System.out.println(Constants.PASSENGER_COUNT_LIST.get(j).getZoneStart());
                 if (Constants.PASSENGER_COUNT_LIST.get(j).getZoneStart() == i && Constants.PASSENGER_COUNT_LIST.get(j).getRoute() == 0) {
                     countPassengersInStationsFirstLine++;
                 }
@@ -84,25 +113,6 @@ public class Main {
                         )
                 );
             }
-        }
-    }
-
-    public static void createPassenger() {
-        for (int i = 1; i <= Constants.PASSENGERS_COUNT_MAX; i++) {
-            Constants.livePassengers.incrementAndGet();
-
-            Random random = new Random();
-
-            int zoneStart = random.nextInt(Constants.STATIONS_COUNT_MAX) + 1;
-            int zoneStop = random.nextInt((Constants.STATIONS_COUNT_MAX - zoneStart) + zoneStart) + 1;
-
-            Constants.PASSENGER_COUNT_LIST.add(
-                    new Passenger(
-                            i,
-                            zoneStart,
-                            zoneStop
-                    )
-            );
         }
     }
 

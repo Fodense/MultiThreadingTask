@@ -22,6 +22,7 @@ public class Station {
     public Station(int numberStation, int x, int countPassengersInStation) {
         this.numberStation = numberStation;
         this.x = x;
+        this.countPassengersInStation = countPassengersInStation;
     }
 
     public synchronized Bus passengersInStation(int name, int route) {

@@ -15,25 +15,20 @@ public class Passenger implements Runnable {
     public Passenger() {
     }
 
-    public Passenger(int name, int zoneStart, int zoneStop) {
+    public Passenger(int name, int zoneStart, int zoneStop, int route) {
         log.info("Пассажир " + name + " идёт на остановку №" + zoneStart + " хочет доехать до остановки №" + zoneStop);
 
         this.name = name;
         this.zoneStart = zoneStart;
         this.zoneStop = zoneStop;
+        this.route = route;
     }
 
     @Override
     public void run() {
-        if ((getZoneStart() - getZoneStop()) % 2 == 0) {
-            route = 0;
-
-        } else {
-            route = 1;
-        }
 
         Constants.STATIONS_COUNT_LIST_FIRST_LINE
-                .get(getZoneStart() - 1)
+                .get(getZoneStart())
                 .passengersInStation(getName(), route)
                 .passengersInBus(getName(), getZoneStop());
     }
