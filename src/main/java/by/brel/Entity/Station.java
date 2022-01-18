@@ -1,9 +1,6 @@
 package by.brel.Entity;
 
-import by.brel.Сonstants.Constants;
 import org.apache.log4j.Logger;
-
-import java.util.Objects;
 
 public class Station {
 
@@ -26,26 +23,22 @@ public class Station {
     }
 
     public synchronized Bus passengersInStation(int name, int route) {
-        log.info("Пассажир " + name + " прибыл на остановку " +  (getNumberStation() + 1) + "; Маршрут " + route);
+        log.info("Пассажир " + name + " прибыл на остановку " +  getNumberStation() + "; Маршрут " + route);
 
         boolean flag = true;
 
         try {
-//            this.countPassengersInStation++;
-
             while (flag) {
                 this.wait();
 
                 if (bus.getRoute() == route && bus.getFreePlacesBus() > 0) {
                     bus.addPassenger();
-//                    this.countPassengersInStation--;
 
                     flag = false;
 
-                    log.info("Пассажир " + name + " сел в автобус " + bus.getName() + " Сел на остановке " + (this.getNumberStation() + 1));
+                    log.info("Пассажир " + name + " сел в автобус " + bus.getName() + " Сел на остановке " + this.getNumberStation() + "; asd " + bus.getRoute());
                 }
 
-//                if (bus.getFreePlacesBus() == 0 || this.countPassengersInStation == 0) {
                 if (bus.getFreePlacesBus() == 0) {
                     bus.notifyBus();
 
@@ -65,24 +58,21 @@ public class Station {
         return null;
     }
 
-    public void busInStation(Bus bus) {
+    public Bus getBus() {
+        return bus;
+    }
+
+    public void setBus(Bus bus) {
+        this.bus = bus;
+
         synchronized (this) {
-
-            // Возможен nullPointer
-//            if (this.x <= bus.getX()) {
-                bus.setStation(this);
-//            }
-
-//            if (Constants.STATIONS_COUNT_LIST.get(Constants.STATIONS_COUNT_LIST.size() - 1).getX() * Constants.STATIONS_COUNT_LIST.size() <= bus.getX()) {
-//                bus.setX(100);
-//            }
+            bus.setStation(this);
 
             if (bus.getCountPassenger() != 0) {
                 bus.notifyAllPassengerInBus();
                 bus.waitBus();
             }
 
-            this.bus = bus;
             bus.setFlag2(false);
 
             this.notifyAll();

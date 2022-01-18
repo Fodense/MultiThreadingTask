@@ -70,8 +70,8 @@ public class MoveFrame extends JFrame implements Runnable {
         g.setColor(Color.BLACK);
 
         //Линии
-        g.drawLine(100, 150, getContentPane().getWidth() - 10, 150);
-        g.drawLine(100, 300, getContentPane().getWidth() - 10, 300);
+        g.drawLine(0, 150, getContentPane().getWidth() - 10, 150);
+        g.drawLine(0, 300, getContentPane().getWidth() - 10, 300);
 
         //Прямоугольник
 //        g.drawRect(100, 150, getContentPane().getWidth() - 200, getContentPane().getHeight() / 2);
@@ -118,13 +118,17 @@ public class MoveFrame extends JFrame implements Runnable {
             );
         }
 
-        int x = 100;
+        int x = 0;
         for (Bus bus : Constants.BUS_COUNT_LIST) {
 //            bus.setX(Constants.STATIONS_COUNT_LIST.get(j).getX());
 //            g.drawRect((int) ((bus.getX() / x) + 102), 152, 20, 10);
-            g.drawRect((int) (bus.getX() + x), 152, 30, 20);
+            if (bus.getRoute() == 0) {
+                g.drawRect((int) (bus.getX() + x), 152, 30, 20);
+                g.drawString("" + bus.getName() + "|" + bus.getCountPassenger(), (int)(bus.getX() + x) + 7, 165);
 
-            g.drawString("" + bus.getName() + "|" + bus.getCountPassenger(), (int)(bus.getX() + x) + 7, 165);
+            } else if (bus.getRoute() == 1){
+                g.drawRect((int) (Constants.STATIONS_COUNT_LIST_LAST_LINE.get(Constants.STATIONS_COUNT_LIST_LAST_LINE.size() - 1).getX() + 40 - bus.getX() + x), 302, 30, 20);
+            }
         }
 
 

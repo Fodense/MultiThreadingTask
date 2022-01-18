@@ -26,7 +26,6 @@ public class Passenger implements Runnable {
 
     @Override
     public void run() {
-
         Constants.STATIONS_COUNT_LIST_FIRST_LINE
                 .get(getZoneStart())
                 .passengersInStation(getName(), route)

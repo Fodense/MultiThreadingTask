@@ -24,7 +24,6 @@ public class Main {
     }
 
     public static void startAll(){
-//        startPassenger();
         startBus();
     }
 
@@ -35,18 +34,19 @@ public class Main {
     }
 
     public static void createPassenger() {
-        for (int i = 1; i <= Constants.PASSENGERS_COUNT_MAX; i++) {
+        for (int i = 0; i < Constants.PASSENGERS_COUNT_MAX; i++) {
             Constants.livePassengers.incrementAndGet();
 
             Random random = new Random();
 
             int zoneStart = random.nextInt(Constants.STATIONS_COUNT_MAX);
-            int zoneStop = random.nextInt((Constants.STATIONS_COUNT_MAX - zoneStart) + zoneStart);
+            int zoneStop = random.nextInt(Constants.STATIONS_COUNT_MAX);
 
             int route;
 
-            if (zoneStart - zoneStop < 0) {
+            if ((zoneStart - zoneStop) < 0) {
                 route = 0;
+
             } else {
                 route = 1;
             }
@@ -69,7 +69,7 @@ public class Main {
             int countPassengersInStationsLastLine = 0;
 
             for (int j = 0; j < Constants.PASSENGER_COUNT_LIST.size(); j++) {
-                System.out.println(Constants.PASSENGER_COUNT_LIST.get(j).getZoneStart());
+
                 if (Constants.PASSENGER_COUNT_LIST.get(j).getZoneStart() == i && Constants.PASSENGER_COUNT_LIST.get(j).getRoute() == 0) {
                     countPassengersInStationsFirstLine++;
                 }
@@ -100,7 +100,7 @@ public class Main {
                 Constants.STATIONS_COUNT_LIST_FIRST_LINE.add(
                         new Station(
                                 i,
-                                Constants.STATIONS_COUNT_LIST_FIRST_LINE.get(i - 1).getX() + 100 / Constants.STATIONS_COUNT_MAX,
+                                Constants.STATIONS_COUNT_LIST_FIRST_LINE.get(i - 1).getX() + 100,
                                 countPassengersInStationsFirstLine
                         )
                 );
@@ -108,7 +108,7 @@ public class Main {
                 Constants.STATIONS_COUNT_LIST_LAST_LINE.add(
                         new Station(
                                 i,
-                                Constants.STATIONS_COUNT_LIST_LAST_LINE.get(i - 1).getX() + 100 / Constants.STATIONS_COUNT_MAX,
+                                Constants.STATIONS_COUNT_LIST_LAST_LINE.get(i - 1).getX() + 100,
                                 countPassengersInStationsLastLine
                         )
                 );
@@ -117,14 +117,14 @@ public class Main {
     }
 
     public static void createBus() throws InterruptedException {
-        for (int i = 1; i <= Constants.BUS_COUNT_MAX; i++) {
+        for (int i = 0; i < Constants.BUS_COUNT_MAX; i++) {
             Constants.BUS_COUNT_LIST.add(
                     new Bus(
                         i,
                         Constants.BUS_CAPACITY,
                         0,
                         Constants.BUS_SPEED,
-                        Util.getRandomInt(Constants.BUS_ROUTE_MAX),
+                        0,
                         true,
                         Util.getRandomBoolean()
                     )
