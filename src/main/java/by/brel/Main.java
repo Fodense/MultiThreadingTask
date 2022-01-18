@@ -13,7 +13,7 @@ import java.util.Random;
 public class Main {
 
     public static void main(String[] args) throws IOException, InterruptedException {
-        if (Constants.START_MODE == 1) {
+        if (Constants.START_MODE <= 1) {
             init();
             startPassenger();
             startAll();
@@ -35,30 +35,35 @@ public class Main {
 
     public static void createPassenger() {
         for (int i = 0; i < Constants.PASSENGERS_COUNT_MAX; i++) {
-            Constants.livePassengers.incrementAndGet();
-
             Random random = new Random();
 
             int zoneStart = random.nextInt(Constants.STATIONS_COUNT_MAX);
             int zoneStop = random.nextInt(Constants.STATIONS_COUNT_MAX);
 
-            int route;
-
-            if ((zoneStart - zoneStop) < 0) {
-                route = 0;
+            if (zoneStart == zoneStop) {
+                i--;
 
             } else {
-                route = 1;
-            }
+                Constants.livePassengers.incrementAndGet();
 
-            Constants.PASSENGER_COUNT_LIST.add(
-                    new Passenger(
-                            i,
-                            zoneStart,
-                            zoneStop,
-                            route
-                    )
-            );
+                int route;
+
+                if ((zoneStart - zoneStop) < 0) {
+                    route = 0;
+
+                } else {
+                    route = 1;
+                }
+
+                Constants.PASSENGER_COUNT_LIST.add(
+                        new Passenger(
+                                i,
+                                2,
+                                0,
+                                1
+                        )
+                );
+            }
         }
     }
 

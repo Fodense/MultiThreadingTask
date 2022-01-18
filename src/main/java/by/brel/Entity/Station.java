@@ -8,6 +8,9 @@ public class Station {
 
     private Bus bus;
 
+    public Object passengerOut = new Object();
+    public Object passengerEntered = new Object();
+
     private int numberStation;
     private int countPassengersInStation;
     private int x;
@@ -34,16 +37,11 @@ public class Station {
                 if (bus.getRoute() == route && bus.getFreePlacesBus() > 0) {
                     bus.addPassenger();
 
+                    this.countPassengersInStation--;
+
                     flag = false;
 
                     log.info("Пассажир " + name + " сел в автобус " + bus.getName() + " Сел на остановке " + this.getNumberStation() + "; asd " + bus.getRoute());
-                }
-
-                if (bus.getFreePlacesBus() == 0) {
-                    bus.notifyBus();
-
-                } else if (bus.getCountPassenger() == 0) {
-                    bus.waitBus();
                 }
 
                 if (!flag) {

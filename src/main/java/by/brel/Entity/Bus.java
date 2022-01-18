@@ -4,6 +4,9 @@ import by.brel.Main;
 import by.brel.Сonstants.Constants;
 import org.apache.log4j.Logger;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Bus implements Runnable {
 
     private static final Logger log = Logger.getLogger(Bus.class);
@@ -40,12 +43,6 @@ public class Bus implements Runnable {
 
     @Override
     public void run() {
-        boolean flag = true;//уберу меби
-
-        if (Constants.livePassengers.get() == 0) {
-            flag = false;
-        }
-
         x = 0;
         route = 0;
         moveFirstLine();
@@ -96,7 +93,8 @@ public class Bus implements Runnable {
             if (i < Constants.STATIONS_COUNT_MAX) {
                 if (Constants.STATIONS_COUNT_LIST_FIRST_LINE.get(i).getX() <= x) {
                     try {
-                        Thread.sleep(Constants.BUS_MOVEMENT_INTERVAL);
+                        travelNextStation();
+
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -117,10 +115,12 @@ public class Bus implements Runnable {
         int i = 0;
 
         while (x <= maxX) {
+
             if (i < Constants.STATIONS_COUNT_MAX) {
                 if (Constants.STATIONS_COUNT_LIST_LAST_LINE.get(i).getX() <= x) {
                     try {
-                        Thread.sleep(Constants.BUS_MOVEMENT_INTERVAL);
+                        travelNextStation();
+
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
