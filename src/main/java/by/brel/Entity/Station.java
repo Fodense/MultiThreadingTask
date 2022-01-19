@@ -8,13 +8,21 @@ public class Station {
 
     private Bus bus;
 
-    public Object passengerOut = new Object();
-    public Object passengerEntered = new Object();
+    public final Object superMonitor = new Object();
 
     private int numberStation;
     private int countPassengersInStation;
     private int x;
     private int y;
+    private boolean flag3 = true;
+
+    public boolean isFlag3() {
+        return flag3;
+    }
+
+    public void setFlag3(boolean flag3) {
+        this.flag3 = flag3;
+    }
 
     public Station() {
     }
@@ -25,27 +33,32 @@ public class Station {
         this.countPassengersInStation = countPassengersInStation;
     }
 
-    public synchronized Bus passengersInStation(int name, int route) {
+    public Bus passengersInStation(int name, int route) {
         log.info("Пассажир " + name + " прибыл на остановку " +  getNumberStation() + "; Маршрут " + route);
 
         boolean flag = true;
 
         try {
             while (flag) {
-                this.wait();
+                synchronized (superMonitor) {
 
-                if (bus.getRoute() == route && bus.getFreePlacesBus() > 0) {
-                    bus.addPassenger();
+                    superMonitor.wait();
 
-                    this.countPassengersInStation--;
 
-                    flag = false;
+                    System.out.println("asd");
+                    if (bus.getRoute() == route) {
+                        bus.addPassenger();
 
-                    log.info("Пассажир " + name + " сел в автобус " + bus.getName() + " Сел на остановке " + this.getNumberStation() + "; asd " + bus.getRoute());
-                }
+                        this.countPassengersInStation--;
 
-                if (!flag) {
-                    return bus;
+                        flag = false;
+
+                        log.info("Пассажир " + name + " сел в автобус " + bus.getName() + " Сел на остановке " + this.getNumberStation() + "; asd " + bus.getRoute());
+                    }
+
+                    if (!flag) {
+                        return bus;
+                    }
                 }
             }
 
@@ -61,9 +74,9 @@ public class Station {
     }
 
     public void setBus(Bus bus) {
-        this.bus = bus;
+        synchronized (superMonitor) {
+            this.bus = bus;
 
-        synchronized (this) {
             bus.setStation(this);
 
             if (bus.getCountPassenger() != 0) {
@@ -73,7 +86,8 @@ public class Station {
 
             bus.setFlag2(false);
 
-            this.notifyAll();
+            flag3 = false;
+            superMonitor.notifyAll();
         }
     }
 

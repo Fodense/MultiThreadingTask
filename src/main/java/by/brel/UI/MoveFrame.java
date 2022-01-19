@@ -106,7 +106,7 @@ public class MoveFrame extends JFrame implements Runnable {
             g.drawRect(station.getX() + j, 270, 30, 30);
 
             g.drawString(//Рисуем кол-во пассажиров на станции
-                    Integer.toString(station.getCountPassengersInStation()),
+                    Integer.toString(station.getCountPassengersInStation() == 1 ? station.getCountPassengersInStation() : 0),
                     station.getX() + j + (30 / 2) - 3,
                     268
             );
@@ -127,7 +127,7 @@ public class MoveFrame extends JFrame implements Runnable {
                 g.drawString("" + bus.getName() + "|" + bus.getCountPassenger(), (int)(bus.getX() + x) + 7, 165);
 
             } else if (bus.getRoute() == 1){
-                g.drawRect((int) (Constants.STATIONS_COUNT_LIST_LAST_LINE.get(Constants.STATIONS_COUNT_LIST_LAST_LINE.size() - 1).getX() + 40 - bus.getX() + x), 302, 30, 20);
+                g.drawRect((int) (Constants.STATIONS_COUNT_LIST_LAST_LINE.get(Constants.STATIONS_COUNT_LIST_LAST_LINE.size() - 1).getX() + 400 - bus.getX() + x), 302, 30, 20);
             }
         }
 
