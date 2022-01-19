@@ -135,13 +135,12 @@ public class Bus implements Runnable {
 
                 if (this.getStation().getNumberStation() == zoneEnd) {
                     Constants.livePassengers.decrementAndGet();
+                    this.removePassenger();
 
                     log.info("Пассажир " + name + " вышел из автобуса " + getName() + " Вышел на остановке " + this.getStation().getNumberStation());
 
                     flag = false;
 
-
-                    this.removePassenger();
                 }
 
                 if (this.getCountPassenger() == 0) {
