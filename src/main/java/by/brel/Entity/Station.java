@@ -1,9 +1,6 @@
 package by.brel.Entity;
 
-import by.brel.Сonstants.Constants;
 import org.apache.log4j.Logger;
-
-import java.util.Objects;
 
 public class Station {
 
@@ -11,45 +8,50 @@ public class Station {
 
     private Bus bus;
 
+    public final Object superMonitor = new Object();
+
     private int numberStation;
     private int countPassengersInStation;
     private int x;
     private int y;
+    private boolean flag3 = true;
+
+    public boolean isFlag3() {
+        return flag3;
+    }
+
+    public void setFlag3(boolean flag3) {
+        this.flag3 = flag3;
+    }
 
     public Station() {
     }
 
-    public Station(int numberStation, int x) {
+    public Station(int numberStation, int x, int countPassengersInStation) {
         this.numberStation = numberStation;
         this.x = x;
+        this.countPassengersInStation = countPassengersInStation;
     }
 
     public synchronized Bus passengersInStation(int name, int route) {
-        log.info("Пассажир " + name + " прибыл на остановку " +  (getNumberStation() + 1) + "; Маршрут " + route);
+        log.info("Пассажир " + name + " прибыл на остановку " +  getNumberStation() + "; Маршрут " + route);
 
         boolean flag = true;
 
-        try {
-            this.countPassengersInStation++;
+//        this.countPassengersInStation++;
 
+        try {
             while (flag) {
                 this.wait();
 
                 if (bus.getRoute() == route && bus.getFreePlacesBus() > 0) {
                     bus.addPassenger();
+
                     this.countPassengersInStation--;
 
                     flag = false;
 
-                    log.info("Пассажир " + name + " сел в автобус " + bus.getName() + " Сел на остановке " + (this.getNumberStation() + 1));
-
-                }
-
-                if (bus.getFreePlacesBus() == 0 || this.countPassengersInStation == 0) {
-                    bus.notifyBus();
-
-                } else if (bus.getCountPassenger() == 0) {
-                    bus.waitBus();
+                    log.info("Пассажир " + name + " сел в автобус " + bus.getName() + " Сел на остановке " + this.getNumberStation());
                 }
 
                 if (!flag) {
@@ -64,24 +66,21 @@ public class Station {
         return null;
     }
 
-    public void busInStation(Bus bus) {
+    public Bus getBus() {
+        return bus;
+    }
+
+    public void setBus(Bus bus) {
+        this.bus = bus;
+
         synchronized (this) {
-
-            // Возможен nullPointer
-//            if (this.x <= bus.getX()) {
-                bus.setStation(this);
-//            }
-
-//            if (Constants.STATIONS_COUNT_LIST.get(Constants.STATIONS_COUNT_LIST.size() - 1).getX() * Constants.STATIONS_COUNT_LIST.size() <= bus.getX()) {
-//                bus.setX(100);
-//            }
+            bus.setStation(this);
 
             if (bus.getCountPassenger() != 0) {
                 bus.notifyAllPassengerInBus();
                 bus.waitBus();
             }
 
-            this.bus = bus;
             bus.setFlag2(false);
 
             this.notifyAll();

@@ -9,7 +9,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class MoveFrame extends JFrame implements Runnable {
     JPanel jPanel;
@@ -65,30 +64,32 @@ public class MoveFrame extends JFrame implements Runnable {
         if (Constants.livePassengers.get() == 0) {
             g.setColor(Color.RED);
         }
+
         g.drawString("Кол-во живых пассажиров: " + Constants.livePassengers.get(), 15 , 50);
 
         g.setColor(Color.BLACK);
 
-        //Линия
-        g.drawLine(100, 150, getContentPane().getWidth(), 150);
+        //Линии
+        g.drawLine(0, 150, getContentPane().getWidth() - 10, 150);
+        g.drawLine(0, 300, getContentPane().getWidth() - 10, 300);
 
         //Прямоугольник
 //        g.drawRect(100, 150, getContentPane().getWidth() - 200, getContentPane().getHeight() / 2);
 
         int i = 0;
 
-        //Рисуем станции
-        for (Station station : Constants.STATIONS_COUNT_LIST) {
+        //Рисуем станции первой линии
+        for (Station station : Constants.STATIONS_COUNT_LIST_FIRST_LINE) {
             i += 100;
 
             g.drawRect(station.getX() + i, 120, 30, 30);
-
 
             g.drawString(//Рисуем кол-во пассажиров на станции
                     Integer.toString(station.getCountPassengersInStation()),
                     station.getX() + i + (30 / 2) - 3,
                     118
             );
+
             g.drawString(//№ станции
                     Integer.toString(station.getNumberStation() + 1),
                     station.getX() + i + (30 / 2) - 3,
@@ -96,11 +97,38 @@ public class MoveFrame extends JFrame implements Runnable {
             );
         }
 
-        int x = 100;
+        int j = 0;
+
+        //Рисуем станции второй линии
+        for (Station station : Constants.STATIONS_COUNT_LIST_LAST_LINE) {
+            j += 100;
+
+            g.drawRect(station.getX() + j, 270, 30, 30);
+
+            g.drawString(//Рисуем кол-во пассажиров на станции
+                    Integer.toString(station.getCountPassengersInStation()),
+                    station.getX() + j + (30 / 2) - 3,
+                    268
+            );
+
+            g.drawString(//№ станции
+                    Integer.toString(station.getNumberStation() + 1),
+                    station.getX() + j + (30 / 2) - 3,
+                    290
+            );
+        }
+
+        int x = 0;
         for (Bus bus : Constants.BUS_COUNT_LIST) {
 //            bus.setX(Constants.STATIONS_COUNT_LIST.get(j).getX());
 //            g.drawRect((int) ((bus.getX() / x) + 102), 152, 20, 10);
-            g.drawRect((int) (bus.getX() + x), 152, 30, 10);
+            if (bus.getRoute() == 0) {
+                g.drawRect((int) (bus.getX() + x), 152, 30, 20);
+                g.drawString("" + bus.getName() + "|" + bus.getCountPassenger(), (int)(bus.getX() + x) + 7, 165);
+
+            } else if (bus.getRoute() == 1){
+                g.drawRect((int) (Constants.STATIONS_COUNT_LIST_FIRST_LINE.get(Constants.STATIONS_COUNT_LIST_FIRST_LINE.size() - 1).getX() + 400 - bus.getX() + x), 302, 30, 20);
+            }
         }
 
 
