@@ -77,7 +77,7 @@ public class Bus implements Runnable {
                     travelNextStation();
 
                     log.info(
-                            "В| Автобус " + getName() +
+                            "|В-->| Автобус " + getName() +
                                     " приехал на остановку №" + i +
                                     "; Пассажиров " + getCountPassenger() +
                                     "; Мест " + getFreePlacesBus() +
@@ -104,7 +104,7 @@ public class Bus implements Runnable {
                     travelNextStation();
 
                     log.info(
-                            "Н| Автобус " + getName() +
+                            "|<--Н| Автобус " + getName() +
                                     " приехал на остановку №" + i +
                                     "; Пассажиров " + getCountPassenger() +
                                     "; Мест " + getFreePlacesBus() +

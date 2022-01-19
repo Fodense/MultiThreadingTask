@@ -27,9 +27,10 @@ public class Station {
     public Station() {
     }
 
-    public Station(int numberStation, int x) {
+    public Station(int numberStation, int x, int countPassengersInStation) {
         this.numberStation = numberStation;
         this.x = x;
+        this.countPassengersInStation = countPassengersInStation;
     }
 
     public synchronized Bus passengersInStation(int name, int route) {
@@ -37,7 +38,7 @@ public class Station {
 
         boolean flag = true;
 
-        this.countPassengersInStation++;
+//        this.countPassengersInStation++;
 
         try {
             while (flag) {

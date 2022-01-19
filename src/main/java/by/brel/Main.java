@@ -70,13 +70,36 @@ public class Main {
     }
 
     public static void createStation() {
-
         for (int i = 0; i < Constants.STATIONS_COUNT_MAX; i++) {
+
+            int countPassengersInStationsFirstLine = 0;
+            int countPassengersInStationsLastLine = 0;
+
+            for (int j = 0; j < Constants.PASSENGER_COUNT_LIST.size(); j++) {
+
+                if (Constants.PASSENGER_COUNT_LIST.get(j).getZoneStart() == i && Constants.PASSENGER_COUNT_LIST.get(j).getRoute() == 0) {
+                    countPassengersInStationsFirstLine++;
+                }
+
+                if (Constants.PASSENGER_COUNT_LIST.get(j).getZoneStart() == i && Constants.PASSENGER_COUNT_LIST.get(j).getRoute() == 1) {
+                    countPassengersInStationsLastLine++;
+                }
+            }
+
             if (i == 0) {
                 Constants.STATIONS_COUNT_LIST_FIRST_LINE.add(
                         new Station(
                                 i,
-                                100
+                                100,
+                                countPassengersInStationsFirstLine
+                        )
+                );
+
+                Constants.STATIONS_COUNT_LIST_LAST_LINE.add(
+                        new Station(
+                                i,
+                                100,
+                                countPassengersInStationsLastLine
                         )
                 );
 
@@ -84,7 +107,16 @@ public class Main {
                 Constants.STATIONS_COUNT_LIST_FIRST_LINE.add(
                         new Station(
                                 i,
-                                Constants.STATIONS_COUNT_LIST_FIRST_LINE.get(i - 1).getX() + 100
+                                Constants.STATIONS_COUNT_LIST_FIRST_LINE.get(i - 1).getX() + 100,
+                                countPassengersInStationsFirstLine
+                        )
+                );
+
+                Constants.STATIONS_COUNT_LIST_LAST_LINE.add(
+                        new Station(
+                                i,
+                                Constants.STATIONS_COUNT_LIST_LAST_LINE.get(i - 1).getX() + 100,
+                                countPassengersInStationsLastLine
                         )
                 );
             }
