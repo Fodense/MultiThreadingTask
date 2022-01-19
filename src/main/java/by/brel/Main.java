@@ -37,10 +37,10 @@ public class Main {
         for (int i = 0; i < Constants.PASSENGERS_COUNT_MAX; i++) {
             Random random = new Random();
 
-//            int zoneStart = random.nextInt(Constants.STATIONS_COUNT_MAX);
-//            int zoneStop = random.nextInt(Constants.STATIONS_COUNT_MAX);
-            int zoneStart = 1;
-            int zoneStop = 0;
+            int zoneStart = random.nextInt(Constants.STATIONS_COUNT_MAX);
+            int zoneStop = random.nextInt(Constants.STATIONS_COUNT_MAX);
+//            int zoneStart = 2;
+//            int zoneStop = 0;
 
             if (zoneStart == zoneStop) {
                 i--;
@@ -62,7 +62,7 @@ public class Main {
                                 i,
                                 zoneStart,
                                 zoneStop,
-                                1
+                                route
                         )
                 );
             }
@@ -70,36 +70,13 @@ public class Main {
     }
 
     public static void createStation() {
+
         for (int i = 0; i < Constants.STATIONS_COUNT_MAX; i++) {
-
-            int countPassengersInStationsFirstLine = 0;
-            int countPassengersInStationsLastLine = 0;
-
-            for (int j = 0; j < Constants.PASSENGER_COUNT_LIST.size(); j++) {
-
-                if (Constants.PASSENGER_COUNT_LIST.get(j).getZoneStart() == i && Constants.PASSENGER_COUNT_LIST.get(j).getRoute() == 0) {
-                    countPassengersInStationsFirstLine++;
-                }
-
-                if (Constants.PASSENGER_COUNT_LIST.get(j).getZoneStart() == i && Constants.PASSENGER_COUNT_LIST.get(j).getRoute() == 1) {
-                    countPassengersInStationsLastLine++;
-                }
-            }
-
             if (i == 0) {
                 Constants.STATIONS_COUNT_LIST_FIRST_LINE.add(
                         new Station(
                                 i,
-                                100,
-                                countPassengersInStationsFirstLine
-                        )
-                );
-
-                Constants.STATIONS_COUNT_LIST_LAST_LINE.add(
-                        new Station(
-                                i,
-                                100,
-                                countPassengersInStationsLastLine
+                                100
                         )
                 );
 
@@ -107,76 +84,12 @@ public class Main {
                 Constants.STATIONS_COUNT_LIST_FIRST_LINE.add(
                         new Station(
                                 i,
-                                Constants.STATIONS_COUNT_LIST_FIRST_LINE.get(i - 1).getX() + 100,
-                                countPassengersInStationsFirstLine
-                        )
-                );
-
-                Constants.STATIONS_COUNT_LIST_LAST_LINE.add(
-                        new Station(
-                                i,
-                                Constants.STATIONS_COUNT_LIST_LAST_LINE.get(i - 1).getX() + 100,
-                                countPassengersInStationsLastLine
+                                Constants.STATIONS_COUNT_LIST_FIRST_LINE.get(i - 1).getX() + 100
                         )
                 );
             }
         }
     }
-
-//    public static void createStation() {
-//
-//        for (int i = 0; i < Constants.STATIONS_COUNT_MAX; i++) {
-//
-//            int countPassengersInStationsFirstLine = 0;
-//            int countPassengersInStationsLastLine = 0;
-//
-//            for (int j = 0; j < Constants.PASSENGER_COUNT_LIST.size(); j++) {
-//
-//                if (Constants.PASSENGER_COUNT_LIST.get(j).getZoneStart() == i && Constants.PASSENGER_COUNT_LIST.get(j).getRoute() == 0) {
-//                    countPassengersInStationsFirstLine++;
-//                }
-//
-//                if (Constants.PASSENGER_COUNT_LIST.get(j).getZoneStart() == i && Constants.PASSENGER_COUNT_LIST.get(j).getRoute() == 1) {
-//                    countPassengersInStationsLastLine++;
-//                }
-//            }
-//
-//            if (i == 0) {
-//                Constants.STATIONS_COUNT_LIST_FIRST_LINE.add(
-//                        new Station(
-//                                i,
-//                                100,
-//                                countPassengersInStationsFirstLine
-//                        )
-//                );
-//
-//                Constants.STATIONS_COUNT_LIST_LAST_LINE.add(
-//                        new Station(
-//                                i,
-//                                100,
-//                                countPassengersInStationsLastLine
-//                        )
-//                );
-//
-//            } else {
-//                Constants.STATIONS_COUNT_LIST_FIRST_LINE.add(
-//                        new Station(
-//                                i,
-//                                Constants.STATIONS_COUNT_LIST_FIRST_LINE.get(i - 1).getX() + 100,
-//                                countPassengersInStationsFirstLine
-//                        )
-//                );
-//
-//                Constants.STATIONS_COUNT_LIST_LAST_LINE.add(
-//                        new Station(
-//                                i,
-//                                Constants.STATIONS_COUNT_LIST_LAST_LINE.get(i - 1).getX() + 100,
-//                                countPassengersInStationsLastLine
-//                        )
-//                );
-//            }
-//        }
-//    }
 
     public static void createBus() throws InterruptedException {
         for (int i = 0; i < Constants.BUS_COUNT_MAX; i++) {

@@ -43,61 +43,38 @@ public class Bus implements Runnable {
     @Override
     public void run() {
         try {
-//            x = 0;
-//            route = 0;
-//            moveFirstLine();
+            log.info("Автобус " + getName() + " начал новый круг");
 
-            x = 0;
-            route = 1;
+            moveFirstLine();
+
+            log.info("Автобус " + getName() + " приехал на конечную");
+
             moveLastLine();
 
+            travelNextStation();
+            log.info("Автобус " + getName() + " закончил маршрут");
+
             if (Constants.livePassengers.get() != 0) {
+                log.info("Автобус " + getName() + " поехал на новый круг");
+
                 Main.startAll();
             }
 
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-
-
-//        try {
-//            int countStations = Constants.STATIONS_COUNT_LIST_FIRST_LINE.size();
-//
-//            for (int i = 0; true;) {
-//                int interval = 1;
-//
-//                if (countStations <= i) {
-//                    x = 100;
-//                    i = 0;
-//
-//                    if (Constants.livePassengers.get() == 0) {
-//                        Thread.sleep(5000);
-//
-//                        System.exit(0);
-//                    }
-//                }
-//
-//                travelNextStation();
-//                moveOnStation(i);
-//
-//                i += interval;
-//            }
-//
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
     }
 
     private void moveFirstLine() throws InterruptedException {
         int i = 0;
 
-        while (x <= Constants.STATIONS_COUNT_LIST_FIRST_LINE.get(Constants.STATIONS_COUNT_LIST_FIRST_LINE.size() - 1).getX() + 100) {
+        x = 0;
+        route = 0;
+
+        while (x <= maxX) {
             if (i < Constants.STATIONS_COUNT_MAX) {
                 if (Constants.STATIONS_COUNT_LIST_FIRST_LINE.get(i).getX() <= x) {
                     travelNextStation();
-
-                    Constants.STATIONS_COUNT_LIST_FIRST_LINE.get(i).setBus(this);
 
                     log.info(
                             "В| Автобус " + getName() +
@@ -106,6 +83,8 @@ public class Bus implements Runnable {
                                     "; Мест " + getFreePlacesBus() +
                                     "; Маршрут " + getRoute()
                     );
+
+                    Constants.STATIONS_COUNT_LIST_FIRST_LINE.get(i).setBus(this);
 
                     i++;
                 }
@@ -116,15 +95,13 @@ public class Bus implements Runnable {
     }
 
     private void moveLastLine() throws InterruptedException {
-        int i = 0;
+        x = 0;
+        route = 1;
 
-        while (x <= maxX) {
-            if (i < Constants.STATIONS_COUNT_LIST_LAST_LINE.size()) {
-
-                if (Constants.STATIONS_COUNT_LIST_LAST_LINE.get(i).getX() <= x) {
+        while (x >= minX) {
+            for (int i = Constants.STATIONS_COUNT_LIST_FIRST_LINE.size() - 1; i >= 0;) {
+                if (Constants.STATIONS_COUNT_LIST_FIRST_LINE.get(i).getX() >= x) {
                     travelNextStation();
-
-                    Constants.STATIONS_COUNT_LIST_LAST_LINE.get(i).setBus(this);
 
                     log.info(
                             "Н| Автобус " + getName() +
@@ -134,26 +111,18 @@ public class Bus implements Runnable {
                                     "; Маршрут " + getRoute()
                     );
 
-                    i++;
+                    Constants.STATIONS_COUNT_LIST_FIRST_LINE.get(i).setBus(this);
+
+                    i--;
                 }
             }
 
-            x = x + 100;
+            x -= travelSpeed;
         }
     }
 
     private void travelNextStation() throws InterruptedException {
         Thread.sleep(Constants.BUS_MOVEMENT_INTERVAL);
-    }
-
-    private void moveOnStation(int i) throws InterruptedException {
-        synchronized (this.monitor) {
-            x = x + travelSpeed;
-
-            Constants.STATIONS_COUNT_LIST_FIRST_LINE.get(i).setBus(this);
-
-            log.info("Автобус " + getName() + " движется на остановку №" + i + "; Пассажиров " + getCountPassenger() + "; Мест " + getFreePlacesBus());
-        }
     }
 
     public synchronized void passengersInBus(int name, int zoneEnd) {
@@ -167,11 +136,12 @@ public class Bus implements Runnable {
                 if (this.getStation().getNumberStation() == zoneEnd) {
                     Constants.livePassengers.decrementAndGet();
 
-                    this.removePassenger();
-
                     log.info("Пассажир " + name + " вышел из автобуса " + getName() + " Вышел на остановке " + this.getStation().getNumberStation());
 
                     flag = false;
+
+
+                    this.removePassenger();
                 }
 
                 if (this.getCountPassenger() == 0) {
