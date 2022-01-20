@@ -39,10 +39,14 @@ public class Bus implements Runnable {
     public void run() {
         log.info("Автобус " + getName() + " начал новый круг");
 
+        x = 0;
+        route = 0;
         moveFirstLine();
 
         log.info("Автобус " + getName() + " приехал на конечную");
 
+        x = Constants.magicNumber + travelSpeed;
+        route = 1;
         moveLastLine();
 
         log.info("Автобус " + getName() + " закончил маршрут");
@@ -52,17 +56,19 @@ public class Bus implements Runnable {
         }
     }
 
-    private void moveFirstLine() {
+        private void moveFirstLine() {
+        int i = 0;
+
         x = 0;
         route = 0;
 
-        for (int i = 0; x <= (Constants.magicNumber + travelSpeed);) {
-            if (i < Constants.STATIONS_COUNT_LIST_FIRST_LINE.size()) {
+        while (x <= Constants.magicNumber + travelSpeed) {
+            if (i < Constants.STATIONS_COUNT_MAX) {
                 if (Constants.STATIONS_COUNT_LIST_FIRST_LINE.get(i).getX() <= x) {
 
                     log.info(
                             "|В-->| Автобус " + getName() +
-                                    " приехал на остановку №" + i +
+                                    " приехал на остановку №F " + i +
                                     "; Пассажиров " + getCountPassenger() +
                                     "; Мест " + getFreePlacesBus() +
                                     "; Маршрут " + getRoute()
@@ -78,17 +84,37 @@ public class Bus implements Runnable {
         }
     }
 
-    private void moveLastLine() {
-        x = Constants.magicNumber + travelSpeed;
-        route = 1;
+//    private void moveFirstLine() {
+//        for (int i = 0; x <= (Constants.magicNumber + travelSpeed);) {
+//            if (i < Constants.STATIONS_COUNT_LIST_FIRST_LINE.size()) {
+//                if (Constants.STATIONS_COUNT_LIST_FIRST_LINE.get(i).getX() <= x) {
+//
+//                    log.info(
+//                            "|В-->| Автобус " + getName() +
+//                                    " приехал на остановку №" + i +
+//                                    "; Пассажиров " + getCountPassenger() +
+//                                    "; Мест " + getFreePlacesBus() +
+//                                    "; Маршрут " + getRoute()
+//                    );
+//
+//                    Constants.STATIONS_COUNT_LIST_FIRST_LINE.get(i).busInStation(this);
+//
+//                    i++;
+//                }
+//            }
+//
+//            x += travelSpeed;
+//        }
+//    }
 
+    private void moveLastLine() {
         for (int i = Constants.STATIONS_COUNT_LIST_LAST_LINE.size() - 1; x >= Constants.minX;) {
             if (i >= 0) {
                 if (Constants.STATIONS_COUNT_LIST_LAST_LINE.get(i).getX() >= x) {
 
                     log.info(
                             "|<--Н| Автобус " + getName() +
-                                    " приехал на остановку №" + i +
+                                    " приехал на остановку №L " + i +
                                     "; Пассажиров " + getCountPassenger() +
                                     "; Мест " + getFreePlacesBus() +
                                     "; Маршрут " + getRoute()

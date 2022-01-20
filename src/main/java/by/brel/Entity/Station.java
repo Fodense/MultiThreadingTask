@@ -58,9 +58,9 @@ public class Station {
     }
 
     public void busInStation(Bus bus) {
-        this.bus = bus;
-
         synchronized (this) {
+            this.bus = bus;
+
             bus.setStation(this);
 
             if (bus.getCountPassenger() != 0) {
