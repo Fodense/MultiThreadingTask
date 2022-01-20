@@ -19,6 +19,11 @@ public class Constants {
     public static List<Passenger> PASSENGER_COUNT_LIST = new ArrayList<>();
     public static List<Bus> BUS_COUNT_LIST = new ArrayList<>();
 
+    public static final int magicNumber = 1000000000;
+    public static final int maxX = 1350;
+    public static final int minX = 0;
+    public static final Object superMonitor = new Object();
+
     public static AtomicInteger livePassengers = new AtomicInteger(0);
 
     public static int START_MODE              = Integer.parseInt(getProperties().getProperty("working.type"));                      // Вариант запуска

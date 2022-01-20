@@ -4,9 +4,6 @@ import by.brel.Main;
 import by.brel.Сonstants.Constants;
 import org.apache.log4j.Logger;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Bus implements Runnable {
 
     private static final Logger log = Logger.getLogger(Bus.class);
@@ -23,8 +20,6 @@ public class Bus implements Runnable {
     private boolean direction;
     private double x;
     private int y;
-    private int maxX = 1250;
-    private int minX = 0;
 
     public Bus() {
     }
@@ -51,12 +46,10 @@ public class Bus implements Runnable {
 
             moveLastLine();
 
-            travelNextStation();
+//            travelNextStation();
             log.info("Автобус " + getName() + " закончил маршрут");
 
             if (Constants.livePassengers.get() != 0) {
-                log.info("Автобус " + getName() + " поехал на новый круг");
-
                 Main.startAll();
             }
 
@@ -66,15 +59,12 @@ public class Bus implements Runnable {
     }
 
     private void moveFirstLine() throws InterruptedException {
-        int i = 0;
-
         x = 0;
         route = 0;
 
-        while (x <= maxX) {
-            if (i < Constants.STATIONS_COUNT_MAX) {
+        for (int i = 0; x <= (Constants.magicNumber + travelSpeed);) {
+            if (i < Constants.STATIONS_COUNT_LIST_FIRST_LINE.size()) {
                 if (Constants.STATIONS_COUNT_LIST_FIRST_LINE.get(i).getX() <= x) {
-                    travelNextStation();
 
                     log.info(
                             "|В-->| Автобус " + getName() +
@@ -84,7 +74,7 @@ public class Bus implements Runnable {
                                     "; Маршрут " + getRoute()
                     );
 
-                    Constants.STATIONS_COUNT_LIST_FIRST_LINE.get(i).setBus(this);
+                    Constants.STATIONS_COUNT_LIST_FIRST_LINE.get(i).busInStation(this);
 
                     i++;
                 }
@@ -94,14 +84,41 @@ public class Bus implements Runnable {
         }
     }
 
+//    private void moveFirstLine() throws InterruptedException {
+//        int i = 0;
+//
+//        x = 0;
+//        route = 0;
+//
+//        while (x <= Constants.magicNumber + travelSpeed) {
+//            if (i < Constants.STATIONS_COUNT_MAX) {
+//                if (Constants.STATIONS_COUNT_LIST_FIRST_LINE.get(i).getX() <= x) {
+//
+//                    log.info(
+//                            "|В-->| Автобус " + getName() +
+//                                    " приехал на остановку №" + i +
+//                                    "; Пассажиров " + getCountPassenger() +
+//                                    "; Мест " + getFreePlacesBus() +
+//                                    "; Маршрут " + getRoute()
+//                    );
+//
+//                    Constants.STATIONS_COUNT_LIST_FIRST_LINE.get(i).setBus(this);
+//
+//                    i++;
+//                }
+//            }
+//
+//            x += travelSpeed;
+//        }
+//    }
+
     private void moveLastLine() throws InterruptedException {
-        x = 0;
+        x = Constants.magicNumber + travelSpeed;
         route = 1;
 
-        while (x >= minX) {
-            for (int i = Constants.STATIONS_COUNT_LIST_FIRST_LINE.size() - 1; i >= 0;) {
-                if (Constants.STATIONS_COUNT_LIST_FIRST_LINE.get(i).getX() >= x) {
-                    travelNextStation();
+        for (int i = Constants.STATIONS_COUNT_LIST_LAST_LINE.size() - 1; x >= Constants.minX;) {
+            if (i >= 0) {
+                if (Constants.STATIONS_COUNT_LIST_LAST_LINE.get(i).getX() >= x) {
 
                     log.info(
                             "|<--Н| Автобус " + getName() +
@@ -111,7 +128,7 @@ public class Bus implements Runnable {
                                     "; Маршрут " + getRoute()
                     );
 
-                    Constants.STATIONS_COUNT_LIST_FIRST_LINE.get(i).setBus(this);
+                    Constants.STATIONS_COUNT_LIST_LAST_LINE.get(i).busInStation(this);
 
                     i--;
                 }
@@ -120,6 +137,34 @@ public class Bus implements Runnable {
             x -= travelSpeed;
         }
     }
+
+//    private void moveLastLine() throws InterruptedException {
+//        int i = 0;
+//
+//        x = 0;
+//        route = 1;
+//
+//        while (x <= Constants.magicNumber + travelSpeed) {
+//            if (i < Constants.STATIONS_COUNT_MAX) {
+//                if (Constants.STATIONS_COUNT_LIST_FIRST_LINE.get(i).getX() <= x) {
+//
+//                    log.info(
+//                            "|<--Н| Автобус " + getName() +
+//                                    " приехал на остановку №" + i +
+//                                    "; Пассажиров " + getCountPassenger() +
+//                                    "; Мест " + getFreePlacesBus() +
+//                                    "; Маршрут " + getRoute()
+//                    );
+//
+//                    Constants.STATIONS_COUNT_LIST_FIRST_LINE.get(i).setBus(this);
+//
+//                    i++;
+//                }
+//            }
+//
+//            x += travelSpeed;
+//        }
+//    }
 
     private void travelNextStation() throws InterruptedException {
         Thread.sleep(Constants.BUS_MOVEMENT_INTERVAL);

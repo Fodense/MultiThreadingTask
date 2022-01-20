@@ -9,12 +9,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Collections;
+import java.util.List;
 
 public class MoveFrame extends JFrame implements Runnable {
     JPanel jPanel;
     JButton jButtonStart;
     JButton jButtonEnd;
     static int flag = 0;
+    int interval = Constants.magicNumber / 1000;
 
     public MoveFrame() {
         initContainerMoveFrame();
@@ -40,7 +43,7 @@ public class MoveFrame extends JFrame implements Runnable {
         pack();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Движуха");
-        setSize(1366,768);
+        setSize(1366,380);
         setLocationRelativeTo(null);
 //        setResizable(false);
         setVisible(true);
@@ -70,67 +73,88 @@ public class MoveFrame extends JFrame implements Runnable {
         g.setColor(Color.BLACK);
 
         //Линии
-        g.drawLine(0, 150, getContentPane().getWidth() - 10, 150);
-        g.drawLine(0, 300, getContentPane().getWidth() - 10, 300);
-
-        //Прямоугольник
-//        g.drawRect(100, 150, getContentPane().getWidth() - 200, getContentPane().getHeight() / 2);
-
-        int i = 0;
+        g.drawLine(0, 150, 1350, 150);
+        g.drawLine(0, 300, 1350, 300);
 
         //Рисуем станции первой линии
         for (Station station : Constants.STATIONS_COUNT_LIST_FIRST_LINE) {
-            i += 100;
 
-            g.drawRect(station.getX() + i, 120, 30, 30);
+            g.drawRect(
+                    (station.getX() / interval) + 50,
+                    120,
+                    30,
+                    30);
 
-            g.drawString(//Рисуем кол-во пассажиров на станции
+            //Рисуем кол-во пассажиров на станции
+            g.drawString(
                     Integer.toString(station.getCountPassengersInStation()),
-                    station.getX() + i + (30 / 2) - 3,
+                    (station.getX() / interval) + 61,
                     118
             );
 
-            g.drawString(//№ станции
-                    Integer.toString(station.getNumberStation() + 1),
-                    station.getX() + i + (30 / 2) - 3,
+            //№ станции
+            g.drawString(
+                    Integer.toString(station.getNumberStation()),
+                    (station.getX() / interval) + 61,
                     140
             );
         }
 
-        int j = 0;
-
         //Рисуем станции второй линии
         for (Station station : Constants.STATIONS_COUNT_LIST_LAST_LINE) {
-            j += 100;
+            g.drawRect(
+                    (Constants.magicNumber - station.getX()) / interval + 50,
+                    270,
+                    30,
+                    30
+            );
 
-            g.drawRect(station.getX() + j, 270, 30, 30);
-
-            g.drawString(//Рисуем кол-во пассажиров на станции
+            //Рисуем кол-во пассажиров на станции
+            g.drawString(
                     Integer.toString(station.getCountPassengersInStation()),
-                    station.getX() + j + (30 / 2) - 3,
+                    (Constants.magicNumber - station.getX()) / interval + 61,
                     268
             );
 
-            g.drawString(//№ станции
-                    Integer.toString(station.getNumberStation() + 1),
-                    station.getX() + j + (30 / 2) - 3,
+            //№ станции
+            g.drawString(
+                    Integer.toString(station.getNumberStation()),
+                    (Constants.magicNumber - station.getX()) / interval + 61,
                     290
             );
         }
 
-        int x = 0;
+        //Рисуем автобусы
         for (Bus bus : Constants.BUS_COUNT_LIST) {
-//            bus.setX(Constants.STATIONS_COUNT_LIST.get(j).getX());
-//            g.drawRect((int) ((bus.getX() / x) + 102), 152, 20, 10);
             if (bus.getRoute() == 0) {
-                g.drawRect((int) (bus.getX() + x), 152, 30, 20);
-                g.drawString("" + bus.getName() + "|" + bus.getCountPassenger(), (int)(bus.getX() + x) + 7, 165);
+                g.drawRect(
+                        (int) (bus.getX() / interval) + 50,
+                        152,
+                        30,
+                        20
+                );
+
+                //Их номера | кол-во пассажиров внутри
+                g.drawString(
+                        "" + bus.getName() + "|" + bus.getCountPassenger(),
+                        (int) (bus.getX() / interval) + 55,
+                        165);
 
             } else if (bus.getRoute() == 1){
-                g.drawRect((int) (Constants.STATIONS_COUNT_LIST_FIRST_LINE.get(Constants.STATIONS_COUNT_LIST_FIRST_LINE.size() - 1).getX() + 400 - bus.getX() + x), 302, 30, 20);
+                g.drawRect(
+                        (Constants.magicNumber - (int)bus.getX()) / interval + 50,
+                        302,
+                        30,
+                        20
+                );
+
+                //Их номера | кол-во пассажиров внутри
+                g.drawString(
+                        "" + bus.getName() + "|" + bus.getCountPassenger(),
+                        (int) (Constants.magicNumber - bus.getX()) / interval + 55,
+                        315);
             }
         }
-
 
         //Кнопки
         if (flag == 1) {

@@ -8,13 +8,13 @@ public class Station {
 
     private Bus bus;
 
-    public final Object superMonitor = new Object();
-
     private int numberStation;
     private int countPassengersInStation;
     private int x;
     private int y;
     private boolean flag3 = true;
+    public Passenger passengerOut = new Passenger();
+
 
     public boolean isFlag3() {
         return flag3;
@@ -38,8 +38,6 @@ public class Station {
 
         boolean flag = true;
 
-//        this.countPassengersInStation++;
-
         try {
             while (flag) {
                 this.wait();
@@ -48,6 +46,7 @@ public class Station {
                     bus.addPassenger();
 
                     this.countPassengersInStation--;
+
 
                     flag = false;
 
@@ -70,7 +69,7 @@ public class Station {
         return bus;
     }
 
-    public void setBus(Bus bus) {
+    public void busInStation(Bus bus) {
         this.bus = bus;
 
         synchronized (this) {
