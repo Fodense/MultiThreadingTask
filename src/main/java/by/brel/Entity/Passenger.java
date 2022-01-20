@@ -28,10 +28,18 @@ public class Passenger implements Runnable {
 
     @Override
     public void run() {
-        Constants.STATIONS_COUNT_LIST_FIRST_LINE
-                .get(getZoneStart())
-                .passengersInStation(getName(), route)
-                .passengersInBus(getName(), getZoneStop());
+        if (getRoute() == 0) {
+            Constants.STATIONS_COUNT_LIST_FIRST_LINE
+                    .get(getZoneStart())
+                    .passengersInStation(getName(), route)
+                    .passengersInBus(getName(), getZoneStop());
+
+        } else if (getRoute() == 1) {
+            Constants.STATIONS_COUNT_LIST_LAST_LINE
+                    .get(getZoneStart())
+                    .passengersInStation(getName(), route)
+                    .passengersInBus(getName(), getZoneStop());
+        }
     }
 
     public int getName() {

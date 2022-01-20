@@ -4,9 +4,6 @@ import by.brel.Main;
 import by.brel.Сonstants.Constants;
 import org.apache.log4j.Logger;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Bus implements Runnable {
 
     private static final Logger log = Logger.getLogger(Bus.class);
@@ -77,7 +74,7 @@ public class Bus implements Runnable {
                                     "; Маршрут " + getRoute()
                     );
 
-                    Constants.STATIONS_COUNT_LIST_FIRST_LINE.get(i).setBus(this);
+                    Constants.STATIONS_COUNT_LIST_FIRST_LINE.get(i).busInStation(this);
 
                     i++;
                 }
@@ -119,9 +116,9 @@ public class Bus implements Runnable {
         x = Constants.magicNumber + travelSpeed;
         route = 1;
 
-        for (int i = Constants.STATIONS_COUNT_LIST_FIRST_LINE.size() - 1; x >= Constants.minX;) {
+        for (int i = Constants.STATIONS_COUNT_LIST_LAST_LINE.size() - 1; x >= Constants.minX;) {
             if (i >= 0) {
-                if (Constants.STATIONS_COUNT_LIST_FIRST_LINE.get(i).getX() >= x) {
+                if (Constants.STATIONS_COUNT_LIST_LAST_LINE.get(i).getX() >= x) {
 
                     log.info(
                             "|<--Н| Автобус " + getName() +
@@ -131,7 +128,7 @@ public class Bus implements Runnable {
                                     "; Маршрут " + getRoute()
                     );
 
-                    Constants.STATIONS_COUNT_LIST_FIRST_LINE.get(i).setBus(this);
+                    Constants.STATIONS_COUNT_LIST_LAST_LINE.get(i).busInStation(this);
 
                     i--;
                 }

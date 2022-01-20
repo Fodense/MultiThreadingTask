@@ -39,8 +39,6 @@ public class Main {
 
             int zoneStart = random.nextInt(Constants.STATIONS_COUNT_MAX);
             int zoneStop = random.nextInt(Constants.STATIONS_COUNT_MAX);
-//            int zoneStart = 2;
-//            int zoneStop = 0;
 
             if (zoneStart == zoneStop) {
                 i--;
