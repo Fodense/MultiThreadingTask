@@ -12,17 +12,6 @@ public class Station {
     private int countPassengersInStation;
     private int x;
     private int y;
-    private boolean flag3 = true;
-    public Passenger passengerOut = new Passenger();
-
-
-    public boolean isFlag3() {
-        return flag3;
-    }
-
-    public void setFlag3(boolean flag3) {
-        this.flag3 = flag3;
-    }
 
     public Station() {
     }
@@ -46,7 +35,6 @@ public class Station {
                     bus.addPassenger();
 
                     this.countPassengersInStation--;
-
 
                     flag = false;
 

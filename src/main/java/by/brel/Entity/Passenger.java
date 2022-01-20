@@ -3,8 +3,6 @@ package by.brel.Entity;
 import by.brel.Сonstants.Constants;
 import org.apache.log4j.Logger;
 
-import java.util.Objects;
-
 public class Passenger implements Runnable {
 
     private static final Logger log = Logger.getLogger(Passenger.class);

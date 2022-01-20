@@ -22,7 +22,6 @@ public class Constants {
     public static final int magicNumber = 1000000000;
     public static final int maxX = 1350;
     public static final int minX = 0;
-    public static final Object superMonitor = new Object();
 
     public static AtomicInteger livePassengers = new AtomicInteger(0);
 
