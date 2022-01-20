@@ -38,8 +38,6 @@ public class Station {
 
         boolean flag = true;
 
-//        this.countPassengersInStation++;
-
         try {
             while (flag) {
                 this.wait();
@@ -47,7 +45,9 @@ public class Station {
                 if (bus.getRoute() == route && bus.getFreePlacesBus() > 0) {
                     bus.addPassenger();
 
-                    this.countPassengersInStation--;
+                    if (this.countPassengersInStation != 0) {
+                        this.countPassengersInStation--;
+                    }
 
                     flag = false;
 

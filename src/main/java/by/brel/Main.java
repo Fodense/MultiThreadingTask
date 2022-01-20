@@ -70,6 +70,8 @@ public class Main {
     }
 
     public static void createStation() {
+        int interval = Constants.magicNumber / Constants.STATIONS_COUNT_MAX;
+
         for (int i = 0; i < Constants.STATIONS_COUNT_MAX; i++) {
 
             int countPassengersInStationsFirstLine = 0;
@@ -90,7 +92,7 @@ public class Main {
                 Constants.STATIONS_COUNT_LIST_FIRST_LINE.add(
                         new Station(
                                 i,
-                                100,
+                                interval,
                                 countPassengersInStationsFirstLine
                         )
                 );
@@ -98,7 +100,7 @@ public class Main {
                 Constants.STATIONS_COUNT_LIST_LAST_LINE.add(
                         new Station(
                                 i,
-                                100,
+                                interval,
                                 countPassengersInStationsLastLine
                         )
                 );
@@ -107,7 +109,7 @@ public class Main {
                 Constants.STATIONS_COUNT_LIST_FIRST_LINE.add(
                         new Station(
                                 i,
-                                Constants.STATIONS_COUNT_LIST_FIRST_LINE.get(i - 1).getX() + 100,
+                                Constants.STATIONS_COUNT_LIST_FIRST_LINE.get(i - 1).getX() + interval,
                                 countPassengersInStationsFirstLine
                         )
                 );
@@ -115,7 +117,7 @@ public class Main {
                 Constants.STATIONS_COUNT_LIST_LAST_LINE.add(
                         new Station(
                                 i,
-                                Constants.STATIONS_COUNT_LIST_LAST_LINE.get(i - 1).getX() + 100,
+                                Constants.STATIONS_COUNT_LIST_LAST_LINE.get(i - 1).getX() + interval,
                                 countPassengersInStationsLastLine
                         )
                 );
