@@ -175,7 +175,7 @@ public class MoveFrame extends JFrame implements Runnable {
         public void actionPerformed(ActionEvent e) {
             flag++;
 
-            Main.startAll();
+            Main.startBus();
         }
     }
 

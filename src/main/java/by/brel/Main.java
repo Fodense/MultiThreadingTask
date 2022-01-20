@@ -7,24 +7,19 @@ import by.brel.UI.MainFrame;
 import by.brel.Utils.Util;
 import by.brel.Сonstants.Constants;
 
-import java.io.IOException;
 import java.util.Random;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException, InterruptedException {
+    public static void main(String[] args) throws InterruptedException {
         if (Constants.START_MODE <= 1) {
             init();
             startPassenger();
-            startAll();
+            startBus();
 
         } else {
             MainFrame.main();
         }
-    }
-
-    public static void startAll(){
-        startBus();
     }
 
     public static void init() throws InterruptedException {
@@ -71,12 +66,10 @@ public class Main {
         int interval = Constants.magicNumber / Constants.STATIONS_COUNT_MAX;
 
         for (int i = 0; i < Constants.STATIONS_COUNT_MAX; i++) {
-
             int countPassengersInStationsFirstLine = 0;
             int countPassengersInStationsLastLine = 0;
 
             for (int j = 0; j < Constants.PASSENGER_COUNT_LIST.size(); j++) {
-
                 if (Constants.PASSENGER_COUNT_LIST.get(j).getZoneStart() == i && Constants.PASSENGER_COUNT_LIST.get(j).getRoute() == 0) {
                     countPassengersInStationsFirstLine++;
                 }
@@ -123,7 +116,7 @@ public class Main {
         }
     }
 
-    public static void createBus() throws InterruptedException {
+    public static void createBus() {
         for (int i = 0; i < Constants.BUS_COUNT_MAX; i++) {
             Constants.BUS_COUNT_LIST.add(
                     new Bus(
@@ -143,7 +136,6 @@ public class Main {
 
         for (int i = 0; i < threadsPassenger.length; i++) {
             threadsPassenger[i] = new Thread(Constants.PASSENGER_COUNT_LIST.get(i));
-
             threadsPassenger[i].start();
         }
     }

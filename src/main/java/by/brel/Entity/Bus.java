@@ -37,28 +37,22 @@ public class Bus implements Runnable {
 
     @Override
     public void run() {
-        try {
-            log.info("Автобус " + getName() + " начал новый круг");
+        log.info("Автобус " + getName() + " начал новый круг");
 
-            moveFirstLine();
+        moveFirstLine();
 
-            log.info("Автобус " + getName() + " приехал на конечную");
+        log.info("Автобус " + getName() + " приехал на конечную");
 
-            moveLastLine();
+        moveLastLine();
 
-//            travelNextStation();
-            log.info("Автобус " + getName() + " закончил маршрут");
+        log.info("Автобус " + getName() + " закончил маршрут");
 
-            if (Constants.livePassengers.get() != 0) {
-                Main.startAll();
-            }
-
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        if (Constants.livePassengers.get() != 0) {
+            Main.startBus();
         }
     }
 
-    private void moveFirstLine() throws InterruptedException {
+    private void moveFirstLine() {
         x = 0;
         route = 0;
 
@@ -84,35 +78,7 @@ public class Bus implements Runnable {
         }
     }
 
-//    private void moveFirstLine() throws InterruptedException {
-//        int i = 0;
-//
-//        x = 0;
-//        route = 0;
-//
-//        while (x <= Constants.magicNumber + travelSpeed) {
-//            if (i < Constants.STATIONS_COUNT_MAX) {
-//                if (Constants.STATIONS_COUNT_LIST_FIRST_LINE.get(i).getX() <= x) {
-//
-//                    log.info(
-//                            "|В-->| Автобус " + getName() +
-//                                    " приехал на остановку №" + i +
-//                                    "; Пассажиров " + getCountPassenger() +
-//                                    "; Мест " + getFreePlacesBus() +
-//                                    "; Маршрут " + getRoute()
-//                    );
-//
-//                    Constants.STATIONS_COUNT_LIST_FIRST_LINE.get(i).setBus(this);
-//
-//                    i++;
-//                }
-//            }
-//
-//            x += travelSpeed;
-//        }
-//    }
-
-    private void moveLastLine() throws InterruptedException {
+    private void moveLastLine() {
         x = Constants.magicNumber + travelSpeed;
         route = 1;
 
@@ -138,41 +104,8 @@ public class Bus implements Runnable {
         }
     }
 
-//    private void moveLastLine() throws InterruptedException {
-//        int i = 0;
-//
-//        x = 0;
-//        route = 1;
-//
-//        while (x <= Constants.magicNumber + travelSpeed) {
-//            if (i < Constants.STATIONS_COUNT_MAX) {
-//                if (Constants.STATIONS_COUNT_LIST_FIRST_LINE.get(i).getX() <= x) {
-//
-//                    log.info(
-//                            "|<--Н| Автобус " + getName() +
-//                                    " приехал на остановку №" + i +
-//                                    "; Пассажиров " + getCountPassenger() +
-//                                    "; Мест " + getFreePlacesBus() +
-//                                    "; Маршрут " + getRoute()
-//                    );
-//
-//                    Constants.STATIONS_COUNT_LIST_FIRST_LINE.get(i).setBus(this);
-//
-//                    i++;
-//                }
-//            }
-//
-//            x += travelSpeed;
-//        }
-//    }
-
-    private void travelNextStation() throws InterruptedException {
-        Thread.sleep(Constants.BUS_MOVEMENT_INTERVAL);
-    }
-
     public synchronized void passengersInBus(int name, int zoneEnd) {
         try {
-
             boolean flag = true;
 
             while (flag) {
@@ -180,12 +113,12 @@ public class Bus implements Runnable {
 
                 if (this.getStation().getNumberStation() == zoneEnd) {
                     Constants.livePassengers.decrementAndGet();
+
                     this.removePassenger();
 
                     log.info("Пассажир " + name + " вышел из автобуса " + getName() + " Вышел на остановке " + this.getStation().getNumberStation());
 
                     flag = false;
-
                 }
 
                 if (this.getCountPassenger() == 0) {
