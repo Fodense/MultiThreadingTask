@@ -144,6 +144,8 @@ public class Main {
         Thread[] threadsBus = new Thread[Constants.BUS_COUNT_LIST.size()];
 
         for (int i = 0; i < threadsBus.length; i++) {
+            Constants.liveBus.incrementAndGet();
+
             threadsBus[i] = new Thread(Constants.BUS_COUNT_LIST.get(i));
 
             try {

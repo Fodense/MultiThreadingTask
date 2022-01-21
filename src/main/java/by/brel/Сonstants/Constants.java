@@ -10,12 +10,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Constants {
 
-    public static List<Station> STATIONS_COUNT_LIST_FIRST_LINE = new ArrayList<>();
-    public static List<Station> STATIONS_COUNT_LIST_LAST_LINE = new ArrayList<>();
+    public static List<Station> STATIONS_COUNT_LIST_FIRST_LINE = new CopyOnWriteArrayList<>();
+    public static List<Station> STATIONS_COUNT_LIST_LAST_LINE = new CopyOnWriteArrayList<>();
     public static List<Passenger> PASSENGER_COUNT_LIST = new ArrayList<>();
     public static List<Bus> BUS_COUNT_LIST = new ArrayList<>();
 
@@ -24,6 +25,7 @@ public class Constants {
     public static final int minX = 0;
 
     public static AtomicInteger livePassengers = new AtomicInteger(0);
+    public static AtomicInteger liveBus = new AtomicInteger(0);
 
     public static int START_MODE              = Integer.parseInt(getProperties().getProperty("working.type"));                      // Вариант запуска
     public static int PASSENGERS_COUNT_MAX    = Integer.parseInt(getProperties().getProperty("passengers.count.max"));              // Общее число пассажиров

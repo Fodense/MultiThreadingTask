@@ -32,7 +32,7 @@ public class Passenger implements Runnable {
                     .passengersInStation(getName(), route)
                     .passengersInBus(getName(), getZoneStop());
 
-        } else if (getRoute() == 1) {
+        } else {
             Constants.STATIONS_COUNT_LIST_LAST_LINE
                     .get(getZoneStart())
                     .passengersInStation(getName(), route)
