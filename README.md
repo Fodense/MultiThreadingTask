@@ -51,3 +51,4 @@
 <br>
 <b style="font-size: 20px">Результат:</b>
 <br>
+<img src="src/main/resources/img/result.png">
