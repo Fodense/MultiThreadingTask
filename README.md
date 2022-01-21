@@ -47,7 +47,7 @@
 
 <b style="font-size: 20px">При в ходных параметрах:</b>
 <br>
-<img src="src/main/resources/img/img.png">
+<img src="src/main/resources/img/startParameters.png">
 <br>
 <b style="font-size: 20px">Результат:</b>
 <br>
