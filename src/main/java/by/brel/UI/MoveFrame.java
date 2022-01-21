@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class MoveFrame extends JFrame implements Runnable {
     JPanel jPanel;
@@ -72,54 +73,82 @@ public class MoveFrame extends JFrame implements Runnable {
 
         g.setColor(Color.BLACK);
 
-        //Линии
+        //Верхняя дорога
         g.drawLine(0, 150, 1350, 150);
+        g.drawLine(0, 180, 1350, 180);
+
+        //Нижняя дорога
         g.drawLine(0, 300, 1350, 300);
+        g.drawLine(0, 330, 1350, 330);
 
         //Рисуем станции первой линии
         for (Station station : Constants.STATIONS_COUNT_LIST_FIRST_LINE) {
-
-            g.drawRect(
+            g.drawImage(
+                    getImage("station"),
                     (station.getX() / interval) + 50,
                     120,
+                    50,
                     30,
-                    30);
+                    this
+            );
+
+            //Рисуем человечка
+            g.drawImage(
+                    getImage("passenger"),
+                    (station.getX() / interval) + 52,
+                    103,
+                    15,
+                    15,
+                    this
+            );
 
             //Рисуем кол-во пассажиров на станции
             g.drawString(
                     Integer.toString(station.getCountPassengersInStation()),
-                    (station.getX() / interval) + 61,
+                    (station.getX() / interval) + 70,
                     118
             );
 
             //№ станции
             g.drawString(
                     Integer.toString(station.getNumberStation()),
-                    (station.getX() / interval) + 61,
+                    (station.getX() / interval) + 94,
                     140
             );
         }
 
         //Рисуем станции второй линии
         for (Station station : Constants.STATIONS_COUNT_LIST_LAST_LINE) {
-            g.drawRect(
+            g.drawImage(
+                    getImage("station"),
                     (Constants.magicNumber - station.getX()) / interval + 50,
                     270,
+                    50,
                     30,
-                    30
+                    this
+            );
+
+            //Рисуем человечка
+            g.drawImage(
+                    getImage("passenger"),
+                    (Constants.magicNumber - station.getX()) / interval + 52,
+                    253,
+                    15,
+                    15,
+                    this
             );
 
             //Рисуем кол-во пассажиров на станции
             g.drawString(
                     Integer.toString(station.getCountPassengersInStation()),
-                    (Constants.magicNumber - station.getX()) / interval + 61,
+                    (Constants.magicNumber - station.getX()) / interval + 70,
                     268
             );
 
             //№ станции
             g.drawString(
                     Integer.toString(station.getNumberStation()),
-                    (Constants.magicNumber - station.getX()) / interval + 61,
+                    (Constants.magicNumber - station.getX()) / interval + 94,
                     290
             );
         }
@@ -127,32 +156,38 @@ public class MoveFrame extends JFrame implements Runnable {
         //Рисуем автобусы
         for (Bus bus : Constants.BUS_COUNT_LIST) {
             if (bus.getRoute() == 0) {
-                g.drawRect(
+                g.drawImage(
+                        getImage("bus"),
                         (int) (bus.getX() / interval) + 50,
-                        152,
-                        30,
-                        20
+                        153,
+                        40,
+                        25,
+                        this
                 );
 
                 //Их номера | кол-во пассажиров внутри
                 g.drawString(
                         "" + bus.getName() + "|" + bus.getCountPassenger(),
-                        (int) (bus.getX() / interval) + 55,
-                        165);
+                        (int) (bus.getX() / interval) + 60,
+                        193
+                );
 
             } else if (bus.getRoute() == 1){
-                g.drawRect(
+                g.drawImage(
+                        getImage("bus"),
                         (Constants.magicNumber - (int)bus.getX()) / interval + 50,
-                        302,
-                        30,
-                        20
+                        303,
+                        40,
+                        25,
+                        this
                 );
 
                 //Их номера | кол-во пассажиров внутри
                 g.drawString(
                         "" + bus.getName() + "|" + bus.getCountPassenger(),
-                        (int) (Constants.magicNumber - bus.getX()) / interval + 55,
-                        315);
+                        (int) (Constants.magicNumber - bus.getX()) / interval + 60,
+                        343
+                );
             }
         }
 
@@ -186,5 +221,9 @@ public class MoveFrame extends JFrame implements Runnable {
         }
     }
 
+    private Image getImage(String name) {
+        ImageIcon imageIcon = new ImageIcon("src/main/resources/img/" + name + ".png");
 
+        return imageIcon.getImage();
+    }
 }
