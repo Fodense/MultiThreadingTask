@@ -42,6 +42,7 @@ public class Bus implements Runnable {
         moveFirstLine();
 
         log.info("Автобус " + getName() + " приехал на конечную");
+        log.info("Автобус " + getName() + " разворачивается и едет по обратному маршруту");
 
         moveLastLine();
 
