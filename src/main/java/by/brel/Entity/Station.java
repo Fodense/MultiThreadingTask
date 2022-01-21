@@ -23,7 +23,7 @@ public class Station {
     }
 
     public Bus passengersInStation(int name, int route) {
-        log.info("Пассажир " + name + " прибыл на остановку " +  getNumberStation() + "; Маршрут " + route);
+        log.info("Passenger " + name + " arrived at stop " + getNumberStation() + "; Route " + route);
 
         boolean flag = true;
 
@@ -39,7 +39,7 @@ public class Station {
 
                         flag = false;
 
-                        log.info("Пассажир " + name + " сел в автобус " + bus.getName() + " Сел на остановке " + this.getNumberStation());
+                        log.info("The passenger " + name + " got on the bus " + bus.getName() + " Got on the bus stop " + this.getNumberStation());
                     }
 
                     if (!flag) {

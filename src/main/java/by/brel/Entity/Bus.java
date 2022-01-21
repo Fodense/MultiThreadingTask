@@ -25,7 +25,7 @@ public class Bus implements Runnable {
     }
 
     public Bus(int name, int maxCapacityBus, int countPassenger, double travelSpeed, boolean flag2, boolean direction) {
-        log.info("Автобус " + name + " поехал; " + "Мест " + maxCapacityBus + "; Скорость " + travelSpeed + "; Маршрут " + route);
+        log.info("Bus " + name + " went; " + "Places " + maxCapacityBus + "; Speed " + travelSpeed + "; Route " + route);
 
         this.name = name;
         this.maxCapacityBus = maxCapacityBus;
@@ -37,16 +37,16 @@ public class Bus implements Runnable {
 
     @Override
     public void run() {
-        log.info("Автобус " + getName() + " начал новый круг");
+        log.info("Bus " + getName() + " started a new circle");
 
         moveFirstLine();
 
-        log.info("Автобус " + getName() + " приехал на конечную");
-        log.info("Автобус " + getName() + " разворачивается и едет по обратному маршруту");
+        log.info("Bus " + getName() + " arrived at the final");
+        log.info("Bus " + getName() + " turns around and goes back");
 
         moveLastLine();
 
-        log.info("Автобус " + getName() + " закончил маршрут");
+        log.info("Bus " + getName() + " completed the route");
 
         Constants.liveBus.decrementAndGet();
 
@@ -64,11 +64,11 @@ public class Bus implements Runnable {
                 if (Constants.STATIONS_COUNT_LIST_FIRST_LINE.get(i).getX() <= x) {
 
                     log.info(
-                            "|В-->| Автобус " + getName() +
-                                    " приехал на остановку №" + i +
-                                    "; Пассажиров " + getCountPassenger() +
-                                    "; Мест " + getFreePlacesBus() +
-                                    "; Маршрут " + getRoute()
+                            "|B-->| Bus " + getName() +
+                                    " arrived at stop number " + i +
+                                    "; Passengers " + getCountPassenger() +
+                                    "; Places " + getFreePlacesBus() +
+                                    "; Route " + getRoute()
                     );
 
                     Constants.STATIONS_COUNT_LIST_FIRST_LINE.get(i).busInStation(this);
@@ -90,11 +90,11 @@ public class Bus implements Runnable {
                 if (Constants.STATIONS_COUNT_LIST_LAST_LINE.get(i).getX() >= x) {
 
                     log.info(
-                            "|<--Н| Автобус " + getName() +
-                                    " приехал на остановку №" + i +
-                                    "; Пассажиров " + getCountPassenger() +
-                                    "; Мест " + getFreePlacesBus() +
-                                    "; Маршрут " + getRoute()
+                            "|<--H| Bus " + getName() +
+                                    " arrived at stop number " + i +
+                                    "; Passengers " + getCountPassenger() +
+                                    "; Places " + getFreePlacesBus() +
+                                    "; Route " + getRoute()
                     );
 
                     Constants.STATIONS_COUNT_LIST_LAST_LINE.get(i).busInStation(this);
@@ -119,7 +119,7 @@ public class Bus implements Runnable {
 
                     this.removePassenger();
 
-                    log.info("Пассажир " + name + " вышел из автобуса " + getName() + " Вышел на остановке " + this.getStation().getNumberStation());
+                    log.info("Passenger " + name + " got off the bus " + getName() + " Got off at bus stop " + this.getStation().getNumberStation());
 
                     flag = false;
                 }

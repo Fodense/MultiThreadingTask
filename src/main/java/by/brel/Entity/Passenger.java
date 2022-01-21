@@ -16,7 +16,7 @@ public class Passenger implements Runnable {
     }
 
     public Passenger(int name, int zoneStart, int zoneStop, int route) {
-        log.info("Пассажир " + name + " идёт на остановку №" + zoneStart + " хочет доехать до остановки №" + zoneStop);
+        log.info("Passenger " + name + " goes to stop " + zoneStart + " wants to get to stop " + zoneStop);
 
         this.name = name;
         this.zoneStart = zoneStart;
