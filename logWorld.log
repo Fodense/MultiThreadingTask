@@ -1,0 +1,275 @@
+17:15:27 [INFO ] : Passenger 0 goes to stop 2 wants to get to stop 3
+17:15:27 [INFO ] : Passenger 1 goes to stop 2 wants to get to stop 3
+17:15:27 [INFO ] : Passenger 2 goes to stop 3 wants to get to stop 1
+17:15:27 [INFO ] : Passenger 3 goes to stop 0 wants to get to stop 3
+17:15:27 [INFO ] : Passenger 4 goes to stop 3 wants to get to stop 2
+17:15:27 [INFO ] : Passenger 5 goes to stop 1 wants to get to stop 2
+17:15:27 [INFO ] : Passenger 6 goes to stop 1 wants to get to stop 0
+17:15:27 [INFO ] : Passenger 7 goes to stop 3 wants to get to stop 0
+17:15:27 [INFO ] : Passenger 8 goes to stop 0 wants to get to stop 2
+17:15:27 [INFO ] : Passenger 9 goes to stop 3 wants to get to stop 1
+17:15:27 [INFO ] : Passenger 10 goes to stop 2 wants to get to stop 0
+17:15:27 [INFO ] : Passenger 11 goes to stop 0 wants to get to stop 2
+17:15:27 [INFO ] : Passenger 12 goes to stop 0 wants to get to stop 3
+17:15:27 [INFO ] : Passenger 13 goes to stop 2 wants to get to stop 0
+17:15:27 [INFO ] : Passenger 14 goes to stop 0 wants to get to stop 2
+17:15:27 [INFO ] : Passenger 15 goes to stop 1 wants to get to stop 3
+17:15:27 [INFO ] : Passenger 16 goes to stop 1 wants to get to stop 2
+17:15:27 [INFO ] : Passenger 17 goes to stop 3 wants to get to stop 2
+17:15:27 [INFO ] : Passenger 18 goes to stop 3 wants to get to stop 2
+17:15:27 [INFO ] : Passenger 19 goes to stop 0 wants to get to stop 3
+17:15:27 [INFO ] : Passenger 20 goes to stop 3 wants to get to stop 0
+17:15:27 [INFO ] : Passenger 21 goes to stop 2 wants to get to stop 0
+17:15:27 [INFO ] : Passenger 22 goes to stop 2 wants to get to stop 0
+17:15:27 [INFO ] : Passenger 23 goes to stop 1 wants to get to stop 3
+17:15:27 [INFO ] : Passenger 24 goes to stop 1 wants to get to stop 0
+17:15:27 [INFO ] : Passenger 25 goes to stop 1 wants to get to stop 3
+17:15:27 [INFO ] : Passenger 26 goes to stop 0 wants to get to stop 1
+17:15:27 [INFO ] : Passenger 27 goes to stop 0 wants to get to stop 2
+17:15:27 [INFO ] : Passenger 28 goes to stop 2 wants to get to stop 0
+17:15:27 [INFO ] : Passenger 29 goes to stop 2 wants to get to stop 3
+17:15:27 [INFO ] : Passenger 30 goes to stop 2 wants to get to stop 3
+17:15:27 [INFO ] : Passenger 31 goes to stop 2 wants to get to stop 1
+17:15:27 [INFO ] : Passenger 32 goes to stop 1 wants to get to stop 0
+17:15:27 [INFO ] : Passenger 33 goes to stop 3 wants to get to stop 0
+17:15:27 [INFO ] : Passenger 34 goes to stop 0 wants to get to stop 2
+17:15:27 [INFO ] : Passenger 35 goes to stop 3 wants to get to stop 1
+17:15:27 [INFO ] : Passenger 36 goes to stop 0 wants to get to stop 2
+17:15:27 [INFO ] : Passenger 37 goes to stop 2 wants to get to stop 3
+17:15:27 [INFO ] : Passenger 38 goes to stop 0 wants to get to stop 1
+17:15:27 [INFO ] : Passenger 39 goes to stop 1 wants to get to stop 0
+17:15:27 [INFO ] : Passenger 40 goes to stop 3 wants to get to stop 2
+17:15:27 [INFO ] : Passenger 41 goes to stop 3 wants to get to stop 1
+17:15:27 [INFO ] : Passenger 42 goes to stop 0 wants to get to stop 1
+17:15:27 [INFO ] : Passenger 43 goes to stop 3 wants to get to stop 0
+17:15:27 [INFO ] : Passenger 44 goes to stop 1 wants to get to stop 2
+17:15:27 [INFO ] : Passenger 45 goes to stop 1 wants to get to stop 0
+17:15:27 [INFO ] : Passenger 46 goes to stop 1 wants to get to stop 0
+17:15:27 [INFO ] : Passenger 47 goes to stop 1 wants to get to stop 3
+17:15:27 [INFO ] : Passenger 48 goes to stop 3 wants to get to stop 2
+17:15:27 [INFO ] : Passenger 49 goes to stop 1 wants to get to stop 3
+17:15:27 [INFO ] : Bus 0 went; Places 3; Speed 0.3; Route 0
+17:15:27 [INFO ] : Bus 1 went; Places 3; Speed 0.3; Route 0
+17:15:27 [INFO ] : Bus 2 went; Places 3; Speed 0.3; Route 0
+17:15:27 [INFO ] : Passenger 2 arrived at stop 3; Route 1
+17:15:27 [INFO ] : Passenger 48 arrived at stop 3; Route 1
+17:15:27 [INFO ] : Passenger 49 arrived at stop 1; Route 0
+17:15:27 [INFO ] : Passenger 47 arrived at stop 1; Route 0
+17:15:27 [INFO ] : Passenger 46 arrived at stop 1; Route 1
+17:15:27 [INFO ] : Passenger 41 arrived at stop 3; Route 1
+17:15:27 [INFO ] : Passenger 42 arrived at stop 0; Route 0
+17:15:27 [INFO ] : Passenger 43 arrived at stop 3; Route 1
+17:15:27 [INFO ] : Passenger 45 arrived at stop 1; Route 1
+17:15:27 [INFO ] : Passenger 44 arrived at stop 1; Route 0
+17:15:27 [INFO ] : Passenger 40 arrived at stop 3; Route 1
+17:15:27 [INFO ] : Passenger 28 arrived at stop 2; Route 1
+17:15:27 [INFO ] : Passenger 39 arrived at stop 1; Route 1
+17:15:27 [INFO ] : Passenger 29 arrived at stop 2; Route 0
+17:15:27 [INFO ] : Passenger 38 arrived at stop 0; Route 0
+17:15:27 [INFO ] : Passenger 25 arrived at stop 1; Route 0
+17:15:27 [INFO ] : Passenger 37 arrived at stop 2; Route 0
+17:15:27 [INFO ] : Passenger 31 arrived at stop 2; Route 1
+17:15:27 [INFO ] : Passenger 32 arrived at stop 1; Route 1
+17:15:27 [INFO ] : Passenger 33 arrived at stop 3; Route 1
+17:15:27 [INFO ] : Passenger 36 arrived at stop 0; Route 0
+17:15:27 [INFO ] : Passenger 34 arrived at stop 0; Route 0
+17:15:27 [INFO ] : Passenger 35 arrived at stop 3; Route 1
+17:15:27 [INFO ] : Passenger 30 arrived at stop 2; Route 0
+17:15:27 [INFO ] : Passenger 16 arrived at stop 1; Route 0
+17:15:27 [INFO ] : Passenger 27 arrived at stop 0; Route 0
+17:15:27 [INFO ] : Passenger 26 arrived at stop 0; Route 0
+17:15:27 [INFO ] : Passenger 17 arrived at stop 3; Route 1
+17:15:27 [INFO ] : Passenger 24 arrived at stop 1; Route 1
+17:15:27 [INFO ] : Passenger 3 arrived at stop 0; Route 0
+17:15:27 [INFO ] : Passenger 23 arrived at stop 1; Route 0
+17:15:27 [INFO ] : Passenger 22 arrived at stop 2; Route 1
+17:15:27 [INFO ] : Passenger 5 arrived at stop 1; Route 0
+17:15:27 [INFO ] : Passenger 21 arrived at stop 2; Route 1
+17:15:27 [INFO ] : Passenger 20 arrived at stop 3; Route 1
+17:15:27 [INFO ] : Passenger 9 arrived at stop 3; Route 1
+17:15:27 [INFO ] : Passenger 15 arrived at stop 1; Route 0
+17:15:27 [INFO ] : Passenger 19 arrived at stop 0; Route 0
+17:15:27 [INFO ] : Passenger 18 arrived at stop 3; Route 1
+17:15:27 [INFO ] : Passenger 6 arrived at stop 1; Route 1
+17:15:27 [INFO ] : Passenger 14 arrived at stop 0; Route 0
+17:15:27 [INFO ] : Passenger 7 arrived at stop 3; Route 1
+17:15:27 [INFO ] : Passenger 4 arrived at stop 3; Route 1
+17:15:27 [INFO ] : Passenger 8 arrived at stop 0; Route 0
+17:15:27 [INFO ] : Passenger 13 arrived at stop 2; Route 1
+17:15:27 [INFO ] : Passenger 12 arrived at stop 0; Route 0
+17:15:27 [INFO ] : Passenger 10 arrived at stop 2; Route 1
+17:15:27 [INFO ] : Passenger 11 arrived at stop 0; Route 0
+17:15:27 [INFO ] : Passenger 0 arrived at stop 2; Route 0
+17:15:27 [INFO ] : Passenger 1 arrived at stop 2; Route 0
+17:15:33 [INFO ] : Bus 0 started a new circle
+17:15:35 [INFO ] : |B-->| Bus 0 arrived at stop number 0; Passengers 0; Places 3; Route 0
+17:15:35 [INFO ] : The passenger 42 got on the bus 0 Got on the bus stop 0
+17:15:35 [INFO ] : The passenger 11 got on the bus 0 Got on the bus stop 0
+17:15:35 [INFO ] : The passenger 12 got on the bus 0 Got on the bus stop 0
+17:15:36 [INFO ] : Bus 1 started a new circle
+17:15:38 [INFO ] : |B-->| Bus 0 arrived at stop number 1; Passengers 3; Places 0; Route 0
+17:15:38 [INFO ] : Passenger 42 got off the bus 0 Got off at bus stop 1
+17:15:38 [INFO ] : The passenger 47 got on the bus 0 Got on the bus stop 1
+17:15:38 [INFO ] : |B-->| Bus 1 arrived at stop number 0; Passengers 0; Places 3; Route 0
+17:15:38 [INFO ] : The passenger 8 got on the bus 1 Got on the bus stop 0
+17:15:38 [INFO ] : The passenger 38 got on the bus 1 Got on the bus stop 0
+17:15:38 [INFO ] : The passenger 36 got on the bus 1 Got on the bus stop 0
+17:15:39 [INFO ] : Bus 2 started a new circle
+17:15:40 [INFO ] : |B-->| Bus 0 arrived at stop number 2; Passengers 3; Places 0; Route 0
+17:15:40 [INFO ] : Passenger 11 got off the bus 0 Got off at bus stop 2
+17:15:40 [INFO ] : The passenger 0 got on the bus 0 Got on the bus stop 2
+17:15:41 [INFO ] : |B-->| Bus 1 arrived at stop number 1; Passengers 3; Places 0; Route 0
+17:15:41 [INFO ] : Passenger 38 got off the bus 1 Got off at bus stop 1
+17:15:41 [INFO ] : The passenger 25 got on the bus 1 Got on the bus stop 1
+17:15:41 [INFO ] : |B-->| Bus 2 arrived at stop number 0; Passengers 0; Places 3; Route 0
+17:15:41 [INFO ] : The passenger 34 got on the bus 2 Got on the bus stop 0
+17:15:41 [INFO ] : The passenger 14 got on the bus 2 Got on the bus stop 0
+17:15:41 [INFO ] : The passenger 19 got on the bus 2 Got on the bus stop 0
+17:15:43 [INFO ] : |B-->| Bus 0 arrived at stop number 3; Passengers 3; Places 0; Route 0
+17:15:43 [INFO ] : Passenger 12 got off the bus 0 Got off at bus stop 3
+17:15:43 [INFO ] : Passenger 0 got off the bus 0 Got off at bus stop 3
+17:15:43 [INFO ] : Passenger 47 got off the bus 0 Got off at bus stop 3
+17:15:43 [INFO ] : Bus 0 arrived at the final
+17:15:43 [INFO ] : Bus 0 turns around and goes back
+17:15:43 [INFO ] : |<--H| Bus 0 arrived at stop number 3; Passengers 0; Places 3; Route 1
+17:15:43 [INFO ] : The passenger 2 got on the bus 0 Got on the bus stop 3
+17:15:43 [INFO ] : The passenger 4 got on the bus 0 Got on the bus stop 3
+17:15:43 [INFO ] : The passenger 7 got on the bus 0 Got on the bus stop 3
+17:15:44 [INFO ] : |B-->| Bus 2 arrived at stop number 1; Passengers 3; Places 0; Route 0
+17:15:44 [INFO ] : |B-->| Bus 1 arrived at stop number 2; Passengers 3; Places 0; Route 0
+17:15:44 [INFO ] : Passenger 8 got off the bus 1 Got off at bus stop 2
+17:15:44 [INFO ] : The passenger 29 got on the bus 1 Got on the bus stop 2
+17:15:44 [INFO ] : Passenger 36 got off the bus 1 Got off at bus stop 2
+17:15:44 [INFO ] : The passenger 37 got on the bus 1 Got on the bus stop 2
+17:15:45 [INFO ] : |<--H| Bus 0 arrived at stop number 2; Passengers 3; Places 0; Route 1
+17:15:45 [INFO ] : Passenger 4 got off the bus 0 Got off at bus stop 2
+17:15:45 [INFO ] : The passenger 13 got on the bus 0 Got on the bus stop 2
+17:15:46 [INFO ] : |B-->| Bus 2 arrived at stop number 2; Passengers 3; Places 0; Route 0
+17:15:46 [INFO ] : Passenger 34 got off the bus 2 Got off at bus stop 2
+17:15:46 [INFO ] : The passenger 30 got on the bus 2 Got on the bus stop 2
+17:15:46 [INFO ] : Passenger 14 got off the bus 2 Got off at bus stop 2
+17:15:46 [INFO ] : The passenger 1 got on the bus 2 Got on the bus stop 2
+17:15:47 [INFO ] : |B-->| Bus 1 arrived at stop number 3; Passengers 3; Places 0; Route 0
+17:15:47 [INFO ] : Bus 1 arrived at the final
+17:15:47 [INFO ] : Passenger 25 got off the bus 1 Got off at bus stop 3
+17:15:47 [INFO ] : Bus 1 turns around and goes back
+17:15:47 [INFO ] : Passenger 37 got off the bus 1 Got off at bus stop 3
+17:15:47 [INFO ] : |<--H| Bus 1 arrived at stop number 3; Passengers 1; Places 2; Route 1
+17:15:47 [INFO ] : Passenger 29 got off the bus 1 Got off at bus stop 3
+17:15:47 [INFO ] : The passenger 18 got on the bus 1 Got on the bus stop 3
+17:15:47 [INFO ] : The passenger 48 got on the bus 1 Got on the bus stop 3
+17:15:47 [INFO ] : The passenger 41 got on the bus 1 Got on the bus stop 3
+17:15:48 [INFO ] : |<--H| Bus 0 arrived at stop number 1; Passengers 3; Places 0; Route 1
+17:15:48 [INFO ] : Passenger 2 got off the bus 0 Got off at bus stop 1
+17:15:48 [INFO ] : The passenger 46 got on the bus 0 Got on the bus stop 1
+17:15:49 [INFO ] : |B-->| Bus 2 arrived at stop number 3; Passengers 3; Places 0; Route 0
+17:15:49 [INFO ] : Bus 2 arrived at the final
+17:15:49 [INFO ] : Passenger 19 got off the bus 2 Got off at bus stop 3
+17:15:49 [INFO ] : Bus 2 turns around and goes back
+17:15:49 [INFO ] : Passenger 1 got off the bus 2 Got off at bus stop 3
+17:15:49 [INFO ] : |<--H| Bus 2 arrived at stop number 3; Passengers 1; Places 2; Route 1
+17:15:49 [INFO ] : Passenger 30 got off the bus 2 Got off at bus stop 3
+17:15:49 [INFO ] : The passenger 43 got on the bus 2 Got on the bus stop 3
+17:15:49 [INFO ] : The passenger 9 got on the bus 2 Got on the bus stop 3
+17:15:49 [INFO ] : The passenger 20 got on the bus 2 Got on the bus stop 3
+17:15:49 [INFO ] : |<--H| Bus 1 arrived at stop number 2; Passengers 3; Places 0; Route 1
+17:15:49 [INFO ] : Passenger 18 got off the bus 1 Got off at bus stop 2
+17:15:49 [INFO ] : Passenger 48 got off the bus 1 Got off at bus stop 2
+17:15:49 [INFO ] : The passenger 28 got on the bus 1 Got on the bus stop 2
+17:15:49 [INFO ] : The passenger 31 got on the bus 1 Got on the bus stop 2
+17:15:50 [INFO ] : |<--H| Bus 0 arrived at stop number 0; Passengers 3; Places 0; Route 1
+17:15:50 [INFO ] : Passenger 13 got off the bus 0 Got off at bus stop 0
+17:15:50 [INFO ] : Passenger 46 got off the bus 0 Got off at bus stop 0
+17:15:50 [INFO ] : Passenger 7 got off the bus 0 Got off at bus stop 0
+17:15:51 [INFO ] : |<--H| Bus 2 arrived at stop number 2; Passengers 3; Places 0; Route 1
+17:15:52 [INFO ] : |<--H| Bus 1 arrived at stop number 1; Passengers 3; Places 0; Route 1
+17:15:52 [INFO ] : Passenger 41 got off the bus 1 Got off at bus stop 1
+17:15:52 [INFO ] : The passenger 6 got on the bus 1 Got on the bus stop 1
+17:15:52 [INFO ] : Passenger 31 got off the bus 1 Got off at bus stop 1
+17:15:52 [INFO ] : The passenger 45 got on the bus 1 Got on the bus stop 1
+17:15:52 [INFO ] : Bus 0 completed the route
+17:15:54 [INFO ] : |<--H| Bus 2 arrived at stop number 1; Passengers 3; Places 0; Route 1
+17:15:54 [INFO ] : Passenger 9 got off the bus 2 Got off at bus stop 1
+17:15:54 [INFO ] : The passenger 24 got on the bus 2 Got on the bus stop 1
+17:15:54 [INFO ] : |<--H| Bus 1 arrived at stop number 0; Passengers 3; Places 0; Route 1
+17:15:54 [INFO ] : Passenger 28 got off the bus 1 Got off at bus stop 0
+17:15:54 [INFO ] : Passenger 45 got off the bus 1 Got off at bus stop 0
+17:15:54 [INFO ] : Passenger 6 got off the bus 1 Got off at bus stop 0
+17:15:56 [INFO ] : Bus 1 completed the route
+17:15:56 [INFO ] : |<--H| Bus 2 arrived at stop number 0; Passengers 3; Places 0; Route 1
+17:15:56 [INFO ] : Passenger 43 got off the bus 2 Got off at bus stop 0
+17:15:56 [INFO ] : Passenger 24 got off the bus 2 Got off at bus stop 0
+17:15:56 [INFO ] : Passenger 20 got off the bus 2 Got off at bus stop 0
+17:15:58 [INFO ] : Bus 2 completed the route
+17:16:01 [INFO ] : Bus 0 started a new circle
+17:16:04 [INFO ] : |B-->| Bus 0 arrived at stop number 0; Passengers 0; Places 3; Route 0
+17:16:04 [INFO ] : The passenger 3 got on the bus 0 Got on the bus stop 0
+17:16:04 [INFO ] : The passenger 27 got on the bus 0 Got on the bus stop 0
+17:16:04 [INFO ] : The passenger 26 got on the bus 0 Got on the bus stop 0
+17:16:04 [INFO ] : Bus 1 started a new circle
+17:16:07 [INFO ] : |B-->| Bus 0 arrived at stop number 1; Passengers 3; Places 0; Route 0
+17:16:07 [INFO ] : Passenger 26 got off the bus 0 Got off at bus stop 1
+17:16:07 [INFO ] : The passenger 5 got on the bus 0 Got on the bus stop 1
+17:16:07 [INFO ] : |B-->| Bus 1 arrived at stop number 0; Passengers 0; Places 3; Route 0
+17:16:07 [INFO ] : Bus 2 started a new circle
+17:16:09 [INFO ] : |B-->| Bus 1 arrived at stop number 1; Passengers 0; Places 3; Route 0
+17:16:09 [INFO ] : The passenger 49 got on the bus 1 Got on the bus stop 1
+17:16:09 [INFO ] : The passenger 15 got on the bus 1 Got on the bus stop 1
+17:16:09 [INFO ] : The passenger 23 got on the bus 1 Got on the bus stop 1
+17:16:10 [INFO ] : |B-->| Bus 0 arrived at stop number 2; Passengers 3; Places 0; Route 0
+17:16:10 [INFO ] : Passenger 5 got off the bus 0 Got off at bus stop 2
+17:16:10 [INFO ] : Passenger 27 got off the bus 0 Got off at bus stop 2
+17:16:10 [INFO ] : |B-->| Bus 2 arrived at stop number 0; Passengers 0; Places 3; Route 0
+17:16:12 [INFO ] : |B-->| Bus 1 arrived at stop number 2; Passengers 3; Places 0; Route 0
+17:16:12 [INFO ] : |B-->| Bus 0 arrived at stop number 3; Passengers 1; Places 2; Route 0
+17:16:12 [INFO ] : Bus 0 arrived at the final
+17:16:12 [INFO ] : Bus 0 turns around and goes back
+17:16:12 [INFO ] : Passenger 3 got off the bus 0 Got off at bus stop 3
+17:16:12 [INFO ] : |<--H| Bus 0 arrived at stop number 3; Passengers 0; Places 3; Route 1
+17:16:12 [INFO ] : The passenger 17 got on the bus 0 Got on the bus stop 3
+17:16:12 [INFO ] : The passenger 40 got on the bus 0 Got on the bus stop 3
+17:16:12 [INFO ] : The passenger 33 got on the bus 0 Got on the bus stop 3
+17:16:12 [INFO ] : |B-->| Bus 2 arrived at stop number 1; Passengers 0; Places 3; Route 0
+17:16:12 [INFO ] : The passenger 16 got on the bus 2 Got on the bus stop 1
+17:16:12 [INFO ] : The passenger 44 got on the bus 2 Got on the bus stop 1
+17:16:14 [INFO ] : |B-->| Bus 1 arrived at stop number 3; Passengers 3; Places 0; Route 0
+17:16:14 [INFO ] : Bus 1 arrived at the final
+17:16:14 [INFO ] : Passenger 49 got off the bus 1 Got off at bus stop 3
+17:16:14 [INFO ] : Passenger 15 got off the bus 1 Got off at bus stop 3
+17:16:14 [INFO ] : Bus 1 turns around and goes back
+17:16:14 [INFO ] : Passenger 23 got off the bus 1 Got off at bus stop 3
+17:16:14 [INFO ] : |<--H| Bus 1 arrived at stop number 3; Passengers 0; Places 3; Route 1
+17:16:14 [INFO ] : The passenger 35 got on the bus 1 Got on the bus stop 3
+17:16:15 [INFO ] : |<--H| Bus 0 arrived at stop number 2; Passengers 3; Places 0; Route 1
+17:16:15 [INFO ] : Passenger 17 got off the bus 0 Got off at bus stop 2
+17:16:15 [INFO ] : The passenger 22 got on the bus 0 Got on the bus stop 2
+17:16:15 [INFO ] : Passenger 40 got off the bus 0 Got off at bus stop 2
+17:16:15 [INFO ] : The passenger 21 got on the bus 0 Got on the bus stop 2
+17:16:15 [INFO ] : |B-->| Bus 2 arrived at stop number 2; Passengers 2; Places 1; Route 0
+17:16:15 [INFO ] : Passenger 16 got off the bus 2 Got off at bus stop 2
+17:16:15 [INFO ] : Passenger 44 got off the bus 2 Got off at bus stop 2
+17:16:17 [INFO ] : |<--H| Bus 1 arrived at stop number 2; Passengers 1; Places 2; Route 1
+17:16:17 [INFO ] : The passenger 10 got on the bus 1 Got on the bus stop 2
+17:16:17 [INFO ] : |<--H| Bus 0 arrived at stop number 1; Passengers 3; Places 0; Route 1
+17:16:17 [INFO ] : |B-->| Bus 2 arrived at stop number 3; Passengers 0; Places 3; Route 0
+17:16:17 [INFO ] : Bus 2 arrived at the final
+17:16:17 [INFO ] : Bus 2 turns around and goes back
+17:16:17 [INFO ] : |<--H| Bus 2 arrived at stop number 3; Passengers 0; Places 3; Route 1
+17:16:19 [INFO ] : |<--H| Bus 1 arrived at stop number 1; Passengers 2; Places 1; Route 1
+17:16:19 [INFO ] : Passenger 35 got off the bus 1 Got off at bus stop 1
+17:16:19 [INFO ] : The passenger 39 got on the bus 1 Got on the bus stop 1
+17:16:19 [INFO ] : The passenger 32 got on the bus 1 Got on the bus stop 1
+17:16:19 [INFO ] : |<--H| Bus 0 arrived at stop number 0; Passengers 3; Places 0; Route 1
+17:16:19 [INFO ] : Passenger 33 got off the bus 0 Got off at bus stop 0
+17:16:19 [INFO ] : Passenger 21 got off the bus 0 Got off at bus stop 0
+17:16:19 [INFO ] : Passenger 22 got off the bus 0 Got off at bus stop 0
+17:16:20 [INFO ] : |<--H| Bus 2 arrived at stop number 2; Passengers 0; Places 3; Route 1
+17:16:21 [INFO ] : Bus 0 completed the route
+17:16:21 [INFO ] : |<--H| Bus 1 arrived at stop number 0; Passengers 3; Places 0; Route 1
+17:16:21 [INFO ] : Passenger 10 got off the bus 1 Got off at bus stop 0
+17:16:21 [INFO ] : Passenger 32 got off the bus 1 Got off at bus stop 0
+17:16:21 [INFO ] : Passenger 39 got off the bus 1 Got off at bus stop 0
+17:16:22 [INFO ] : |<--H| Bus 2 arrived at stop number 1; Passengers 0; Places 3; Route 1
+17:16:23 [INFO ] : Bus 1 completed the route
+17:16:24 [INFO ] : |<--H| Bus 2 arrived at stop number 0; Passengers 0; Places 3; Route 1
+17:16:26 [INFO ] : Bus 2 completed the route
