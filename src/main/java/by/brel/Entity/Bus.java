@@ -47,7 +47,9 @@ public class Bus implements Runnable {
 
         log.info("Автобус " + getName() + " закончил маршрут");
 
-        if (Constants.livePassengers.get() != 0) {
+        Constants.liveBus.decrementAndGet();
+
+        if (Constants.liveBus.get() == 0 && Constants.livePassengers.get() != 0) {
             Main.startBus();
         }
     }
@@ -79,7 +81,7 @@ public class Bus implements Runnable {
     }
 
     private void moveLastLine() {
-        x = Constants.magicNumber + travelSpeed;
+        x = (Constants.magicNumber + travelSpeed);
         route = 1;
 
         for (int i = Constants.STATIONS_COUNT_LIST_LAST_LINE.size() - 1; x >= Constants.minX;) {
@@ -135,11 +137,11 @@ public class Bus implements Runnable {
         return (maxCapacityBus - countPassenger);
     }
 
-    public void addPassenger() {
+    public synchronized void addPassenger() {
         this.countPassenger++;
     }
 
-    public void removePassenger() {
+    public synchronized void removePassenger() {
         this.countPassenger--;
     }
 

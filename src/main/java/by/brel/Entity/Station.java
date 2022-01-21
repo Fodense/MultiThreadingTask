@@ -22,27 +22,29 @@ public class Station {
         this.countPassengersInStation = countPassengersInStation;
     }
 
-    public synchronized Bus passengersInStation(int name, int route) {
+    public Bus passengersInStation(int name, int route) {
         log.info("Пассажир " + name + " прибыл на остановку " +  getNumberStation() + "; Маршрут " + route);
 
         boolean flag = true;
 
         try {
             while (flag) {
-                this.wait();
+                synchronized(this) {
+                    this.wait();
 
-                if (bus.getRoute() == route && bus.getFreePlacesBus() > 0) {
-                    bus.addPassenger();
+                    if (bus.getRoute() == route && bus.getFreePlacesBus() > 0) {
+                        bus.addPassenger();
 
-                    this.countPassengersInStation--;
+                        this.countPassengersInStation--;
 
-                    flag = false;
+                        flag = false;
 
-                    log.info("Пассажир " + name + " сел в автобус " + bus.getName() + " Сел на остановке " + this.getNumberStation());
-                }
+                        log.info("Пассажир " + name + " сел в автобус " + bus.getName() + " Сел на остановке " + this.getNumberStation());
+                    }
 
-                if (!flag) {
-                    return bus;
+                    if (!flag) {
+                        return bus;
+                    }
                 }
             }
 
@@ -58,9 +60,9 @@ public class Station {
     }
 
     public void busInStation(Bus bus) {
-        this.bus = bus;
-
         synchronized (this) {
+            this.bus = bus;
+
             bus.setStation(this);
 
             if (bus.getCountPassenger() != 0) {
