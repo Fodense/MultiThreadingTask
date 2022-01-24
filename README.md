@@ -49,6 +49,10 @@
 <br>
 <img src="src/main/resources/img/startParameters.png">
 <br>
-<b style="font-size: 20px">Результат:</b>
+<b style="font-size: 20px">Результат UI:</b>
 <br>
 <img src="src/main/resources/img/result.png">
+<br>
+<b style="font-size: 20px">Результат console:</b>
+<br>
+Пример работы с консолью можно посмотреть в файле лога - logWorld.log
